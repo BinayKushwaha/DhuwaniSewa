@@ -1,0 +1,12 @@
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.Model.deps.json
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.CrossCutting.dll
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.CrossCutting.pdb
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfoInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfo.cs
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.CopyComplete
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb

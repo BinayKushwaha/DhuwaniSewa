@@ -1,0 +1,9 @@
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\bin\Debug\netcoreapp3.1\Wheeler.Utils.deps.json
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\bin\Debug\netcoreapp3.1\Wheeler.Utils.dll
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\bin\Debug\netcoreapp3.1\Wheeler.Utils.pdb
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.AssemblyInfoInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.AssemblyInfo.cs
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.csproj.CoreCompileInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.dll
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.pdb
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.Utils\obj\Debug\netcoreapp3.1\Wheeler.Utils.csprojAssemblyReference.cache

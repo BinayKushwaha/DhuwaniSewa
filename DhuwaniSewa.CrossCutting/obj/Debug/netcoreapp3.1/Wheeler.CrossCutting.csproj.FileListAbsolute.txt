@@ -1,0 +1,9 @@
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\bin\Debug\netcoreapp3.1\Wheeler.CrossCutting.deps.json
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\bin\Debug\netcoreapp3.1\Wheeler.CrossCutting.dll
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\bin\Debug\netcoreapp3.1\Wheeler.CrossCutting.pdb
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.AssemblyInfoInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.AssemblyInfo.cs
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.csproj.CoreCompileInputs.cache
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.dll
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.pdb
+D:\Project\Startup\Wheeler\Wheeler\Wheeler.CrossCutting\obj\Debug\netcoreapp3.1\Wheeler.CrossCutting.csprojAssemblyReference.cache

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DhuwaniSewa.Database\DhuwaniSewa.Database.csproj" />
+    <ProjectReference Include="..\DhuwaniSewa.Utils\DhuwaniSewa.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
