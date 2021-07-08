@@ -5,12 +5,13 @@ using System.Text;
 
 namespace DhuwaniSewa.Model.DbEntities
 {
-    public class Employee
+    public class Employee:RecordHistory
     {
         public int Id { get; set; }
         public string Desigination { get; set; }
-        public int AppUserId { get; set; }
+        public int UserId { get; set; }
         public bool IsActive { get;set; }
+        public string DhuwaniSewaId { get; set; }
         public AppUsers AppUsers { get; set; }
     }
 }

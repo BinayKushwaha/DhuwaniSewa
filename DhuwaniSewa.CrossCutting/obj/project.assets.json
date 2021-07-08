@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj",
       "projectName": "DhuwaniSewa.CrossCutting",
-      "projectPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.CrossCutting\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.CrossCutting\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

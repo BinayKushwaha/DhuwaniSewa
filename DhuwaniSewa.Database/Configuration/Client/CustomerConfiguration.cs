@@ -15,9 +15,9 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.IsActive).IsRequired().HasDefaultValue(true);
 
-            builder.Property(a => a.AppUserId).IsRequired();
-            builder.HasOne(a => a.AppUsers).WithOne(b => b.Customer).
-                HasForeignKey<Customer>(c => c.AppUserId).
+            builder.Property(a => a.UserId).IsRequired();
+            builder.HasOne(a => a.AppUser).WithOne(b => b.Customer).
+                HasForeignKey<Customer>(c => c.UserId).
                 HasConstraintName("FK_Customer_To_AppUser");
         }
     }

@@ -13,5 +13,7 @@ namespace DhuwaniSewa.Model.DbEntities
         public string LastName { get; set; }
         public int AppUserId { get; set; }
         public AppUsers  AppUsers { get; set; }
+        public IList<PersonalDetailDocumentDetail> PersonalDetailDocumentDetails { get; set; }
+        public IList<PersonalDetailContactDetail> PersonalDetailContactDetails { get; set; }
     }
 }

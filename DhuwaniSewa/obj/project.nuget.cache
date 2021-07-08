@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s3rArkUob8nl6kYSjrptXJVd7QconNENo3eMLGUyA2f0uNU5foQcd0AD6jjHGCnBhoR22BKRpbZp4UbYArVz+A==",
+  "dgSpecHash": "f2TSEnv7hbTWJqt5KOZjMDK6BoIRiyMfpS1SJ06dYMAIJrnLvWILGKswTB1DAW3EOrZTCy6JYp5gFEGcz/yFAQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
+  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

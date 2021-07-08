@@ -6316,11 +6316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
       "projectName": "DhuwaniSewa.Database",
-      "projectPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.Database\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6337,8 +6337,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
-              "projectPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
+            "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
+              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
             }
           }
         }

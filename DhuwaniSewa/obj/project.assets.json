@@ -6432,11 +6432,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
       "projectName": "DhuwaniSewa.Web",
-      "projectPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6453,8 +6453,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj": {
-              "projectPath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj"
+            "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj": {
+              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj"
             }
           }
         }

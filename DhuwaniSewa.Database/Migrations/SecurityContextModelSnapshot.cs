@@ -19,6 +19,585 @@ namespace DhuwaniSewa.Database.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.AppUsers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCompnay")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsEmployee")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsServiceProvider")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("AppUsers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ApplicationUsers", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Enum")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Choice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Enum")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Choice");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.CompanyDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("CompanyDetails");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ContactDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.DocumentDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("IssuedDistrict")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desigination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DhuwaniSewaId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("PersonalDetails");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetailContactDetail", b =>
+                {
+                    b.Property<int>("PersonalDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContactDetailId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonalDetailId", "ContactDetailId");
+
+                    b.HasIndex("ContactDetailId");
+
+                    b.ToTable("PersonalDetailContactDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetailDocumentDetail", b =>
+                {
+                    b.Property<int>("PersonDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DocumentDetailId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonDetailId", "DocumentDetailId");
+
+                    b.HasIndex("DocumentDetailId");
+
+                    b.ToTable("PersonalDetailDocumentDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.RefreshToken", b =>
+                {
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JwtId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Token");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("RefreshToken");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.SerialNumbers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Employee")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceProvider")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceSeeker")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SerialNumbers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProvider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("DetailsCorrectAgreed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DhuwaniSewaId")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ServiceProvider");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderVehicleDetail", b =>
+                {
+                    b.Property<int>("ServiceProviderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfVehicle")
+                        .HasColumnType("int");
+
+                    b.HasKey("ServiceProviderId", "VehicleDetailId");
+
+                    b.HasIndex("VehicleDetailId")
+                        .IsUnique();
+
+                    b.ToTable("ServiceProviderVehicleDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceSeeker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("DetailsCorrectAgreed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DhuwaniSewaId")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ServiceSeeker");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.VehicleDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("VehicleDetail");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -150,237 +729,6 @@ namespace DhuwaniSewa.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.AppUsers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsCompnay")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("IsEmployee")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ApplicationUsers", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.CompanyDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("CompanyDetails");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Desigination")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
-
-                    b.ToTable("PersonalDetails");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.RefreshToken", b =>
-                {
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("JwtId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Token");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("RefreshToken");
-                });
-
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ApplicationRoles", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
@@ -394,6 +742,198 @@ namespace DhuwaniSewa.Database.Migrations
                         .HasDefaultValue(true);
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.AppUsers", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ApplicationUsers", "Users")
+                        .WithOne("AppUsers")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.AppUsers", "UserId")
+                        .HasConstraintName("FK_AspUser_ApplicationUser")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Choice", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.Category", "Category")
+                        .WithMany("Choices")
+                        .HasForeignKey("CategoryId")
+                        .HasConstraintName("FK_Category_Choice")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.CompanyDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
+                        .WithOne("CompanyDetail")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.CompanyDetail", "AppUserId")
+                        .HasConstraintName("FK_Companydetail_To_AppUsers")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
+                        .WithOne("Customer")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.Customer", "UserId")
+                        .HasConstraintName("FK_Customer_To_AppUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Employee", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
+                        .WithOne("Employee")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.Employee", "UserId")
+                        .HasConstraintName("FK_Employee_To_AppUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
+                        .WithOne("PersonalDetail")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.PersonalDetail", "AppUserId")
+                        .HasConstraintName("FK_PersonalDetail_To_AppUsers")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetailContactDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ContactDetail", "ContactDetail")
+                        .WithMany("PersonalDetailContactDetails")
+                        .HasForeignKey("ContactDetailId")
+                        .HasConstraintName("FK_ConactDetail_PersonalDetailContactDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.PersonalDetail", "PersonalDetail")
+                        .WithMany("PersonalDetailContactDetails")
+                        .HasForeignKey("PersonalDetailId")
+                        .HasConstraintName("FK_PersonalDetail_PersonalDetailContactDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContactDetail");
+
+                    b.Navigation("PersonalDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetailDocumentDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.DocumentDetail", "DocumentDetail")
+                        .WithMany("PersonalDetailDocumentDetails")
+                        .HasForeignKey("DocumentDetailId")
+                        .HasConstraintName("FK_DocumentDetail_PersonalDetailDocumentDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.PersonalDetail", "PersonalDetail")
+                        .WithMany("PersonalDetailDocumentDetails")
+                        .HasForeignKey("PersonDetailId")
+                        .HasConstraintName("FK_PersonalDetail_DocumenDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentDetail");
+
+                    b.Navigation("PersonalDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.RefreshToken", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ApplicationUsers", "User")
+                        .WithOne("RefreshToken")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.RefreshToken", "UserId")
+                        .HasConstraintName("FK_RefreshToken_User")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProvider", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
+                        .WithOne("ServiceProvider")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceProvider", "UserId")
+                        .HasConstraintName("FK_ServiceProvider_AppUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderVehicleDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ServiceProvider", "ServiceProvider")
+                        .WithMany("ServiceProviderVehicleDetail")
+                        .HasForeignKey("ServiceProviderId")
+                        .HasConstraintName("FK_SericeProvider_ServiceProviderVehicleDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.VehicleDetail", "VehicleDetail")
+                        .WithOne("ServiceProviderVehicleDetail")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceProviderVehicleDetail", "VehicleDetailId")
+                        .HasConstraintName("FK_ServiceProviderVehicleDetail_VehicleDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceProvider");
+
+                    b.Navigation("VehicleDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceSeeker", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
+                        .WithOne("ServiceSeeker")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceSeeker", "UserId")
+                        .HasConstraintName("FK_ServiceSeeker_AppUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.VehicleDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.Choice", "Brand")
+                        .WithMany("VehicleDetailBrand")
+                        .HasForeignKey("BrandId")
+                        .HasConstraintName("Fk_VehicleDetail_Brand_Choice")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.Choice", "Type")
+                        .WithMany("VehicleDetailType")
+                        .HasForeignKey("TypeId")
+                        .HasConstraintName("FK_VehicleDetail_Type_Choice")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,78 +987,6 @@ namespace DhuwaniSewa.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.AppUsers", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.ApplicationUsers", "Users")
-                        .WithOne("AppUsers")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.AppUsers", "UserId")
-                        .HasConstraintName("FK_AspUser_ApplicationUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.CompanyDetail", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithOne("CompanyDetail")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.CompanyDetail", "AppUserId")
-                        .HasConstraintName("FK_Companydetail_To_AppUsers")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithOne("Customer")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.Customer", "AppUserId")
-                        .HasConstraintName("FK_Customer_To_AppUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Employee", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithOne("Employee")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.Employee", "AppUserId")
-                        .HasConstraintName("FK_Employee_To_AppUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithOne("PersonalDetail")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.PersonalDetail", "AppUserId")
-                        .HasConstraintName("FK_PersonalDetail_To_AppUsers")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.RefreshToken", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.ApplicationUsers", "User")
-                        .WithOne("RefreshToken")
-                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.RefreshToken", "UserId")
-                        .HasConstraintName("FK_RefreshToken_User")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ApplicationRoles", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -537,6 +1005,10 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("PersonalDetail");
+
+                    b.Navigation("ServiceProvider");
+
+                    b.Navigation("ServiceSeeker");
                 });
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ApplicationUsers", b =>
@@ -544,6 +1016,45 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Navigation("AppUsers");
 
                     b.Navigation("RefreshToken");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Category", b =>
+                {
+                    b.Navigation("Choices");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Choice", b =>
+                {
+                    b.Navigation("VehicleDetailBrand");
+
+                    b.Navigation("VehicleDetailType");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ContactDetail", b =>
+                {
+                    b.Navigation("PersonalDetailContactDetails");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.DocumentDetail", b =>
+                {
+                    b.Navigation("PersonalDetailDocumentDetails");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
+                {
+                    b.Navigation("PersonalDetailContactDetails");
+
+                    b.Navigation("PersonalDetailDocumentDetails");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProvider", b =>
+                {
+                    b.Navigation("ServiceProviderVehicleDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.VehicleDetail", b =>
+                {
+                    b.Navigation("ServiceProviderVehicleDetail");
                 });
 #pragma warning restore 612, 618
         }

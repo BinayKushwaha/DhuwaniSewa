@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XhcF1+4oN3iFUZgWdzeAL52JuqdMyJkwYRLMeX7Tnz2KuCxbfd8zbdGDPdvPLT1w3xBqbXbPHzy5x7HIQvlMyA==",
+  "dgSpecHash": "b/ouT4BerJTmws0v7Qt58aLv6mQ2/Zp4MupLpMvat7qHMwVrwKxTx4h+WH5+JaRuAhR6xOSKTFjuZuoL6DhLmw==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Startup\\Wheeler\\Wheeler\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj",
+  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.IoC\\DhuwaniSewa.IoC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.0\\microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",

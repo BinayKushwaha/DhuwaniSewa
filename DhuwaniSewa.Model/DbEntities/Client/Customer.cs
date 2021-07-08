@@ -3,8 +3,8 @@
     public class Customer
     {
         public int Id { get; set; }
-        public int AppUserId { get; set; }
+        public int UserId { get; set; }
         public bool IsActive { get; set; }
-        public AppUsers AppUsers { get; set; }
+        public AppUsers AppUser { get; set; }
     }
 }
