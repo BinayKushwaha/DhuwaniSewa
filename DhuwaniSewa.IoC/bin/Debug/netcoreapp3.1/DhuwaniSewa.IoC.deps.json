@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "DhuwaniSewa.IoC/1.0.0": {
         "dependencies": {
-          "DhuwaniSewa.Application": "1.0.0",
+          "DhuwaniSewa.Domain": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
           "Microsoft.Extensions.Configuration.Binder": "5.0.0",
@@ -1172,14 +1172,6 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "DhuwaniSewa.Application/1.0.0": {
-        "dependencies": {
-          "DhuwaniSewa.Domain": "1.0.0"
-        },
-        "runtime": {
-          "DhuwaniSewa.Application.dll": {}
-        }
-      },
       "DhuwaniSewa.CrossCutting/1.0.0": {
         "runtime": {
           "DhuwaniSewa.CrossCutting.dll": {}
@@ -1983,11 +1975,6 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
-    },
-    "DhuwaniSewa.Application/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "DhuwaniSewa.CrossCutting/1.0.0": {
       "type": "project",

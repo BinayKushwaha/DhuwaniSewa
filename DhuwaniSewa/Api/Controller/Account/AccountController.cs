@@ -1,6 +1,4 @@
-﻿using DhuwaniSewa.Application.Auth;
-using DhuwaniSewa.Application.User;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.ViewModel;
 using DhuwaniSewa.Utils.CustomException;
+using DhuwaniSewa.Domain;
 
 namespace DhuwaniSewa.Web.Api.Controller.Account
 {
@@ -19,13 +17,13 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
 
     public class AccountController : ControllerBase
     {
-        private readonly IUserApplication _userApplication;
-        private readonly IAuthenticationApplication _authenticationApplication;
-        public AccountController(IUserApplication userApplication,
-            IAuthenticationApplication authenticationApplication) 
+        private readonly IUserService _userService;
+        private readonly IAuthenticationService _authenticationService;
+        public AccountController(IUserService userService,
+            IAuthenticationService authenticationService) 
         {
-            this._userApplication = userApplication;
-            this._authenticationApplication = authenticationApplication;
+            this._userService = userService;
+            this._authenticationService = authenticationService;
         }
 
         [HttpPost]
@@ -37,7 +35,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-               var result= await _userApplication.Register(request);
+               var result= await _userService.Register(request);
                 return Ok(ResponseModel.Success("User registered successfully.",result));
             }
             catch(CustomException ex)
@@ -58,7 +56,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs");
-                var result = await _authenticationApplication.Login(request);
+                var result = await _authenticationService.Login(request);
                 return Ok(ResponseModel.Success("Login successfull.",result));
             }
             catch(Exception ex)
@@ -74,7 +72,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-                var result =await _authenticationApplication.GetRefreshedToken(request);
+                var result =await _authenticationService.GetRefreshedToken(request);
                 return Ok(ResponseModel.Success("Tokens are refreshed successfully.", result));
             }
             catch(Exception ex)

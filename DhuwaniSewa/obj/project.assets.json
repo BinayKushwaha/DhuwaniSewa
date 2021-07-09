@@ -1689,19 +1689,6 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "DhuwaniSewa.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "DhuwaniSewa.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DhuwaniSewa.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DhuwaniSewa.Application.dll": {}
-        }
-      },
       "DhuwaniSewa.CrossCutting/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1747,7 +1734,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "DhuwaniSewa.Application": "1.0.0",
+          "DhuwaniSewa.Domain": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
           "Microsoft.Extensions.Configuration.Binder": "5.0.0",
@@ -6383,11 +6370,6 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
-    },
-    "DhuwaniSewa.Application/1.0.0": {
-      "type": "project",
-      "path": "../DhuwaniSewa.Application/DhuwaniSewa.Application.csproj",
-      "msbuildProject": "../DhuwaniSewa.Application/DhuwaniSewa.Application.csproj"
     },
     "DhuwaniSewa.CrossCutting/1.0.0": {
       "type": "project",

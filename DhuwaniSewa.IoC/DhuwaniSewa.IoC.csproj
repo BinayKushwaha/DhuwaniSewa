@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DhuwaniSewa.Application\DhuwaniSewa.Application.csproj" />
+    <ProjectReference Include="..\DhuwaniSewa.Domain\DhuwaniSewa.Domain.csproj" />
   </ItemGroup>
 
 </Project>

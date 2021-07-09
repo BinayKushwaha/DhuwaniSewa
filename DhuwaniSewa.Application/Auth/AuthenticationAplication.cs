@@ -6,8 +6,8 @@ namespace DhuwaniSewa.Application.Auth
 {
     public class AuthenticationAplication : IAuthenticationApplication
     {
-        public readonly IAuthenticationDomain _authenticationDomain;
-        public AuthenticationAplication(IAuthenticationDomain authenticationDomain)
+        public readonly IAuthenticationService _authenticationDomain;
+        public AuthenticationAplication(IAuthenticationService authenticationDomain)
         {
             _authenticationDomain = authenticationDomain;
         }

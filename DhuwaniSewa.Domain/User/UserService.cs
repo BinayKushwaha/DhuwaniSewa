@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DhuwaniSewa.Domain
 {
-    public class UserDomain : IUserDomain
+    public class UserService : IUserService
     {
         private readonly IRepositoryService<AppUsers, int> _userRepository;
         private readonly UserManager<ApplicationUsers> _userManager;
         private readonly IUnitOfWork _unitOfWork;
-        public UserDomain(IRepositoryService<AppUsers, int> userRepository,
+        public UserService(IRepositoryService<AppUsers, int> userRepository,
             IUnitOfWork unitOfWork,
             UserManager<ApplicationUsers> userManager
             )

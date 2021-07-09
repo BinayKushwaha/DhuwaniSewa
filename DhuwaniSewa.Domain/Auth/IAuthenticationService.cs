@@ -6,8 +6,9 @@ using DhuwaniSewa.Model.ViewModel;
 
 namespace DhuwaniSewa.Domain
 {
-    public interface IUserDomain
+    public interface IAuthenticationService
     {
-        Task<RegisterUserViewModel> Register(RegisterUserViewModel model);
+        Task<ResponseModel> Login(LoginViewModel request);
+        Task<ResponseModel> GetRefreshedToken(RefreshTokenViewModel request);
     }
 }

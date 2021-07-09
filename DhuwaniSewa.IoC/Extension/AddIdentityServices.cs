@@ -1,5 +1,4 @@
-﻿using DhuwaniSewa.Application.Auth;
-using DhuwaniSewa.Database.Context;
+﻿using DhuwaniSewa.Database.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -8,9 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using DhuwaniSewa.Domain.Auth;
 using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.ViewModel;
+using DhuwaniSewa.Domain;
 
 namespace DhuwaniSewa.IoC.Helper
 {
@@ -21,8 +20,7 @@ namespace DhuwaniSewa.IoC.Helper
             services.AddIdentityCore<ApplicationUsers>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<ApplicationRoles>()
             .AddEntityFrameworkStores<ApplicationContext>();
             
-            services.AddTransient<IAuthenticationApplication, AuthenticationAplication>();
-            services.AddTransient<IAuthenticationDomain, AuthenticationDomain>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             services.AddOptions();
             var appSettingsSection = configuration.GetSection("JwtConfiguration");

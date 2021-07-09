@@ -9,7 +9,6 @@ D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa.Utils\obj\Debug\netcoreapp3.1\Dhu
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\bin\Debug\netcoreapp3.1\DhuwaniSewa.Utils.deps.json
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\bin\Debug\netcoreapp3.1\DhuwaniSewa.Utils.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\bin\Debug\netcoreapp3.1\DhuwaniSewa.Utils.pdb
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\obj\Debug\netcoreapp3.1\DhuwaniSewa.Utils.csproj.AssemblyReference.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\obj\Debug\netcoreapp3.1\DhuwaniSewa.Utils.AssemblyInfoInputs.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\obj\Debug\netcoreapp3.1\DhuwaniSewa.Utils.AssemblyInfo.cs
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Utils\obj\Debug\netcoreapp3.1\DhuwaniSewa.Utils.csproj.CoreCompileInputs.cache

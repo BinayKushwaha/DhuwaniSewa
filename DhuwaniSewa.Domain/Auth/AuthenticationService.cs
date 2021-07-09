@@ -16,16 +16,16 @@ using DhuwaniSewa.Utils.CustomException;
 using DhuwaniSewa.Utils.Helper;
 using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
-namespace DhuwaniSewa.Domain.Auth
+namespace DhuwaniSewa.Domain
 {
-    public class AuthenticationDomain : IAuthenticationDomain
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<ApplicationUsers> _userManager;
         private readonly JwtConfiguration _jwtConfiguration;
         private readonly IRepositoryService<RefreshToken, int> _refreshTokeRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly TokenValidationParameters _tokenValidationParameters;
-        public AuthenticationDomain(UserManager<ApplicationUsers> userManager,
+        public AuthenticationService(UserManager<ApplicationUsers> userManager,
             IOptions<JwtConfiguration> setting,
             IRepositoryService<RefreshToken, int> refreshTokeRepo,
             IUnitOfWork unitOfWork,

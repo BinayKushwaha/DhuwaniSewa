@@ -9,8 +9,8 @@ namespace DhuwaniSewa.Application.User
 {
     public class UserApplication : IUserApplication
     {
-        private readonly IUserDomain _userDomain;
-        public UserApplication(IUserDomain userDomain)
+        private readonly IUserService _userDomain;
+        public UserApplication(IUserService userDomain)
         {
             _userDomain = userDomain;
         }

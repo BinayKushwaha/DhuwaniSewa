@@ -15,7 +15,6 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\bin\Debug\netcoreap
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.CrossCutting.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\bin\Debug\netcoreapp3.1\DhuwaniSewa.CrossCutting.pdb
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfoInputs.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfo.cs
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
