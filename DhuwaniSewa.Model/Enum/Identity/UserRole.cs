@@ -6,6 +6,8 @@ namespace DhuwaniSewa.Model.Enum
 {
     public enum UserRole
     {
-        Administrator=1
+        Administrator=1,
+        ServiceProvider=2,
+        ServiceSeeker=3
     }
 }

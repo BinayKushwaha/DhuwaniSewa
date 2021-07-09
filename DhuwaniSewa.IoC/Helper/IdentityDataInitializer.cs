@@ -45,6 +45,22 @@ namespace DhuwaniSewa.IoC.Helper
                 role.Description = UserRole.Administrator.ToString();
                 IdentityResult result = roleManager.CreateAsync(role).Result;
             }
+            if(!roleManager.RoleExistsAsync(nameof(UserRole.ServiceProvider)).Result)
+            {
+                ApplicationRoles serviceProvider = new ApplicationRoles();
+                serviceProvider.Name = nameof(UserRole.ServiceProvider);
+                serviceProvider.NormalizedName = nameof(UserRole.ServiceProvider);
+                serviceProvider.Description = nameof(UserRole.ServiceProvider);
+                IdentityResult identityResult = roleManager.CreateAsync(serviceProvider).Result;
+            }
+            if (!roleManager.RoleExistsAsync(nameof(UserRole.ServiceSeeker)).Result)
+            {
+                ApplicationRoles serviceSeeker = new ApplicationRoles();
+                serviceSeeker.Name = nameof(UserRole.ServiceSeeker);
+                serviceSeeker.NormalizedName = nameof(UserRole.ServiceSeeker);
+                serviceSeeker.Description = nameof(UserRole.ServiceSeeker);
+                IdentityResult identityResult = roleManager.CreateAsync(serviceSeeker).Result;
+            }
         }
     }
 }
