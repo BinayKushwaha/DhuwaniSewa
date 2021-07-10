@@ -21,3 +21,4 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreap
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.CopyComplete
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache

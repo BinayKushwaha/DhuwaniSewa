@@ -299,7 +299,7 @@ namespace DhuwaniSewa.Database.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Number")
+                    b.Property<string>("RegistrationNumber")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -354,6 +354,29 @@ namespace DhuwaniSewa.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.FiscalYear", b =>
+                {
+                    b.Property<int>("FiscalYearId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("FiscalYearId");
+
+                    b.ToTable("FiscalYear");
                 });
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>

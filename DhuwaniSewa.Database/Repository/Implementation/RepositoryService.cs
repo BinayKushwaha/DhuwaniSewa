@@ -45,9 +45,9 @@ namespace DhuwaniSewa.Database.Repository
             _dbSet.RemoveRange(entities);
         }
 
-        public async Task<TEntity> GetAync(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity> GetAync(Expression<Func<TEntity, bool>> expression=null)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            return expression==null? await _dbSet.FirstOrDefaultAsync(): await _dbSet.FirstOrDefaultAsync(expression);
         }
 
         public async Task<List<TEntity>> GetAllAsync(bool asNoTRacking = false)

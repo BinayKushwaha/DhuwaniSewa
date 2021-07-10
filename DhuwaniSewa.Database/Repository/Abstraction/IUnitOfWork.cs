@@ -10,7 +10,7 @@ namespace DhuwaniSewa.Database.Repository
 {
     public interface IUnitOfWork: IDisposable
     {
-        Task CommitAsync();
+        Task<int> CommitAsync();
         Task<IDbContextTransaction> BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified);
     }
 }

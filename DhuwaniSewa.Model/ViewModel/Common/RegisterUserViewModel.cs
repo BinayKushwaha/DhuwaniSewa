@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using DhuwaniSewa.Model.DbEntities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

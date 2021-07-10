@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,6 +7,12 @@
   <ItemGroup>
     <ProjectReference Include="..\DhuwaniSewa.Database\DhuwaniSewa.Database.csproj" />
     <ProjectReference Include="..\DhuwaniSewa.Utils\DhuwaniSewa.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Client\Common\Company\" />
+    <Folder Include="Client\Employee\" />
+    <Folder Include="Client\ServiceSeeker\" />
   </ItemGroup>
 
 </Project>

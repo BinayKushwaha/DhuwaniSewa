@@ -15,7 +15,7 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
 
             builder.Property(a => a.Type).IsRequired().HasMaxLength(50);
-            builder.Property(a => a.Number).IsRequired().HasMaxLength(100);
+            builder.Property(a => a.RegistrationNumber).IsRequired().HasMaxLength(100);
             builder.Property(a => a.IssuedDistrict).HasMaxLength(100);
         }
     }

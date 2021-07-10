@@ -18,7 +18,7 @@ namespace DhuwaniSewa.Database.Repository
         Task<TEntity> GetByIdAsync(Tkey Id);
 
         Task<List<TEntity>> GetAllAsync(bool asNoTRacking = false);
-        Task<TEntity> GetAync(Expression<Func<TEntity, bool>> expression);
+        Task<TEntity> GetAync(Expression<Func<TEntity, bool>> expression=null);
 
     }
 }

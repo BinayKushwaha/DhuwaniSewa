@@ -23,11 +23,11 @@ namespace DhuwaniSewa.Database.Repository
             return await DataContext.Database.BeginTransactionAsync(isolationLevel);
         }
 
-        public Task CommitAsync()
+        public async Task<int> CommitAsync()
         {
             if(_IsDisposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
-            return  DataContext.SaveChangesAsync();
+            return await  DataContext.SaveChangesAsync();
         }
         public void Dispose()
         {

@@ -16,8 +16,9 @@ namespace DhuwaniSewa.IoC
 
             AddIdentityServices.ConfigureService(services,configuration);
             AddRepositoryServices.ConfiguerServices(services);
+            AddCustomMapper.ConfigureServices(services);
             AddCommonServices.ConfigureServices(services);
-
+            AddDomainServices.ConfigureServices(services);
         }
     }
 }

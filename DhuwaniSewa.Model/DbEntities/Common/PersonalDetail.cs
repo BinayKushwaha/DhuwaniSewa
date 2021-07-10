@@ -7,6 +7,11 @@ namespace DhuwaniSewa.Model.DbEntities
 {
     public class PersonalDetail
     {
+        public PersonalDetail()
+        {
+            PersonalDetailDocumentDetails = new List<PersonalDetailDocumentDetail>();
+            PersonalDetailContactDetails = new List<PersonalDetailContactDetail>();
+        }
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

@@ -7,7 +7,7 @@ namespace DhuwaniSewa.Database.Repository
 {
     public abstract class BaseRepository
     {
-        public ApplicationContext ApplicationContext { get; private set; }
+        private ApplicationContext ApplicationContext { get;  set; }
 
         public BaseRepository(ApplicationContext  applicationContext)
         {

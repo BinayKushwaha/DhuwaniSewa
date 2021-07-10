@@ -11,7 +11,7 @@ using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.ViewModel;
 using DhuwaniSewa.Domain;
 
-namespace DhuwaniSewa.IoC.Helper
+namespace DhuwaniSewa.IoC
 {
     public static class AddIdentityServices
     {
