@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DhuwaniSewa.Database.Configuration.Common
+namespace DhuwaniSewa.Database.Configuration
 {
     public class SerialNumberConfiguration : IEntityTypeConfiguration<SerialNumbers>
     {

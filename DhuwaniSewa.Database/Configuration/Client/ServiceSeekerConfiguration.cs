@@ -18,8 +18,8 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(a => a.DhuwaniSewaId).IsRequired().HasMaxLength(250);
 
             builder.HasOne(a => a.AppUser).
-                WithOne(b => b.ServiceSeeker).
-                HasForeignKey<ServiceSeeker>(c => c.UserId).
+                WithMany(b => b.ServiceSeeker).
+                HasForeignKey(c => c.UserId).
                 HasConstraintName("FK_ServiceSeeker_AppUser").IsRequired();
         }
     }

@@ -13,13 +13,13 @@ namespace DhuwaniSewa.Database.Configuration
         {
             builder.HasKey(a => new { a.PersonalDetailId, a.ContactDetailId });
 
-            builder.HasOne<PersonalDetail>(a => a.PersonalDetail).
+            builder.HasOne(a => a.PersonalDetail).
                 WithMany(b => b.PersonalDetailContactDetails).
                 HasForeignKey(c => c.PersonalDetailId).
                 HasConstraintName("FK_PersonalDetail_PersonalDetailContactDetail").
                 IsRequired();
 
-            builder.HasOne<ContactDetail>(a => a.ContactDetail).
+            builder.HasOne(a => a.ContactDetail).
                 WithMany(b => b.PersonalDetailContactDetails).
                 HasForeignKey(c => c.ContactDetailId).
                 HasConstraintName("FK_ConactDetail_PersonalDetailContactDetail").

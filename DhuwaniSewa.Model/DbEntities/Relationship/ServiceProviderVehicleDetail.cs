@@ -8,7 +8,6 @@ namespace DhuwaniSewa.Model.DbEntities
     {
         public int ServiceProviderId { get; set; }
         public int VehicleDetailId { get; set; }
-        public  int NumberOfVehicle { get; set; }
         public ServiceProvider ServiceProvider { get; set; }
         public VehicleDetail VehicleDetail { get; set; }
     }

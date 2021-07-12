@@ -61,7 +61,7 @@ namespace DhuwaniSewa.Database.Repository
 
         public IQueryable<TEntity> GetQueryable()
         {
-            return _dbSet.AsQueryable();
+            return _dbSet;
         }
 
         public TEntity Update(TEntity entity)

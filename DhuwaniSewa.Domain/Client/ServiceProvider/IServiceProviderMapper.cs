@@ -8,7 +8,7 @@ namespace DhuwaniSewa.Domain
 {
     public interface IServiceProviderMapper
     {
-        ServiceProvider MapToEntity(ServiceProviderViewModel source);
-        ServiceProviderViewModel MapToViewmodel(ServiceProvider source);
+        ServiceProvider MapToEntity(ServiceProviderViewModel source,ServiceProvider destination=null);
+        ServiceProviderViewModel MapToViewmodel(ServiceProvider source, ServiceProviderViewModel destination=null);
     }
 }

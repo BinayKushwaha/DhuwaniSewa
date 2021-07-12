@@ -4,14 +4,16 @@ using DhuwaniSewa.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DhuwaniSewa.Database.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class SecurityContextModelSnapshot : ModelSnapshot
+    [Migration("20210711120927_Modify vehicle detail structure")]
+    partial class Modifyvehicledetailstructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,7 +243,8 @@ namespace DhuwaniSewa.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("CompanyDetails");
                 });
@@ -349,7 +352,8 @@ namespace DhuwaniSewa.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Employees");
                 });
@@ -403,7 +407,8 @@ namespace DhuwaniSewa.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("PersonalDetails");
                 });
@@ -523,7 +528,8 @@ namespace DhuwaniSewa.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("ServiceProvider");
                 });
@@ -581,7 +587,8 @@ namespace DhuwaniSewa.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("ServiceSeeker");
                 });
@@ -799,8 +806,8 @@ namespace DhuwaniSewa.Database.Migrations
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.CompanyDetail", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithMany("CompanyDetail")
-                        .HasForeignKey("AppUserId")
+                        .WithOne("CompanyDetail")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.CompanyDetail", "AppUserId")
                         .HasConstraintName("FK_Companydetail_To_AppUsers")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -823,8 +830,8 @@ namespace DhuwaniSewa.Database.Migrations
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Employee", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithMany("Employee")
-                        .HasForeignKey("UserId")
+                        .WithOne("Employee")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.Employee", "UserId")
                         .HasConstraintName("FK_Employee_To_AppUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -835,8 +842,8 @@ namespace DhuwaniSewa.Database.Migrations
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithMany("PersonalDetail")
-                        .HasForeignKey("AppUserId")
+                        .WithOne("PersonalDetail")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.PersonalDetail", "AppUserId")
                         .HasConstraintName("FK_PersonalDetail_To_AppUsers")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -901,8 +908,8 @@ namespace DhuwaniSewa.Database.Migrations
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProvider", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
-                        .WithMany("ServiceProvider")
-                        .HasForeignKey("UserId")
+                        .WithOne("ServiceProvider")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceProvider", "UserId")
                         .HasConstraintName("FK_ServiceProvider_AppUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -934,8 +941,8 @@ namespace DhuwaniSewa.Database.Migrations
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceSeeker", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
-                        .WithMany("ServiceSeeker")
-                        .HasForeignKey("UserId")
+                        .WithOne("ServiceSeeker")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceSeeker", "UserId")
                         .HasConstraintName("FK_ServiceSeeker_AppUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

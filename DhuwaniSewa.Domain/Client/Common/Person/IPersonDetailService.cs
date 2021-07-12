@@ -9,6 +9,8 @@ namespace DhuwaniSewa.Domain
     public interface IPersonDetailService
     {
         Task<int> Save(PersonDetailViewmodel request);
-        IList<PersonDetailViewmodel> GetALL();
+        Task<IList<PersonDetailViewmodel>> GetALL();
+        void Update(PersonDetailViewmodel request);
+        void Delete(int Id); 
     }
 }

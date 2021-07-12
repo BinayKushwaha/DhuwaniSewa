@@ -8,11 +8,12 @@ namespace DhuwaniSewa.Domain
 {
     public class PersonDetailMapper : IPersonalDetailMapper
     {
-        public PersonDetailViewmodel MapToViewmodel(PersonalDetail source)
+        public PersonDetailViewmodel MapToViewmodel(PersonalDetail source, PersonDetailViewmodel destination=null)
         {
             try
             {
-                PersonDetailViewmodel destination = new PersonDetailViewmodel();
+                if(destination==null)
+                    destination = new PersonDetailViewmodel();
                 destination.FirstName = source.FirstName;
                 destination.MiddleName = source.MiddleName;
                 destination.LastName = source.LastName;
@@ -42,11 +43,12 @@ namespace DhuwaniSewa.Domain
             }
         }
 
-        public PersonalDetail MapToEntity(PersonDetailViewmodel source)
+        public PersonalDetail MapToEntity(PersonDetailViewmodel source,PersonalDetail destination)
         {
             try
             {
-                PersonalDetail destination = new PersonalDetail();
+                if(destination==null)
+                    destination = new PersonalDetail();
                 destination.AppUserId = source.UserId;
                 destination.FirstName = source.FirstName;
                 destination.MiddleName = source.MiddleName;

@@ -23,8 +23,4 @@
     <ProjectReference Include="..\DhuwaniSewa.Model\DhuwaniSewa.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Script\" />
-  </ItemGroup>
-
 </Project>

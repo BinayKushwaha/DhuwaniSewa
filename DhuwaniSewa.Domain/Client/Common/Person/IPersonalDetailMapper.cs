@@ -8,7 +8,7 @@ namespace DhuwaniSewa.Domain
 {
     public interface IPersonalDetailMapper
     {
-        PersonDetailViewmodel MapToViewmodel(PersonalDetail source);
-        PersonalDetail MapToEntity(PersonDetailViewmodel source);
+        PersonDetailViewmodel MapToViewmodel(PersonalDetail source, PersonDetailViewmodel destination=null);
+        PersonalDetail MapToEntity(PersonDetailViewmodel source, PersonalDetail destination=null);
     }
 }

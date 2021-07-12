@@ -13,6 +13,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
 {
     [Route("api/serviceProvider")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ServiceProviderController : ControllerBase
     {
         private readonly IServiceProviderService _serviceProviderService;
@@ -21,8 +22,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
             this._serviceProviderService = serviceProviderService;
         }
         [HttpPost]
-        [Route("save")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        [Route("post")]
         public async Task<IActionResult> Save([FromBody] ServiceProviderViewModel request)
         {
             try
@@ -36,6 +36,52 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
 
+            }
+        }
+        [HttpPut]
+        [Route("put")]
+        public IActionResult update([FromBody] ServiceProviderViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid Inputs");
+                 _serviceProviderService.Update(request);
+                return Ok(ResponseModel.Success("Service Provider details save succesfully."));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
+
+            }
+        }
+        [HttpGet]
+        [Route("list")]
+        [AllowAnonymous]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var result =  _serviceProviderService.GetAll();
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
+            }
+        }
+        [HttpGet]
+        [Route("get/{id}")]
+        public async Task<IActionResult> Get(int Id)
+        {
+            try
+            {
+                var result = await _serviceProviderService.Get(Id);
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
             }
         }
     }

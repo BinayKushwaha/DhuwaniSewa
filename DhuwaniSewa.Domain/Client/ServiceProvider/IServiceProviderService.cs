@@ -11,5 +11,7 @@ namespace DhuwaniSewa.Domain
         Task<int> Save(ServiceProviderViewModel reuest);
         void Update(ServiceProviderViewModel request);
         IList<ServiceProviderViewModel> GetAll();
+        Task<ServiceProviderViewModel> Get(int Id);
+        void Delete(int Id);
     }
 }

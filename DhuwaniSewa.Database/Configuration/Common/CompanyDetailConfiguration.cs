@@ -15,8 +15,8 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(a => a.Name).IsRequired().HasMaxLength(250);
 
-            builder.HasOne(a => a.AppUsers).WithOne(b => b.CompanyDetail).
-                HasForeignKey<CompanyDetail>(c => c.AppUserId).
+            builder.HasOne(a => a.AppUsers).WithMany(b => b.CompanyDetail).
+                HasForeignKey(c => c.AppUserId).
                 HasConstraintName("FK_Companydetail_To_AppUsers").IsRequired();
         }
     }

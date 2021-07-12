@@ -9,7 +9,7 @@ namespace DhuwaniSewa.Model.DbEntities
         public int PersonDetailId { get; set; }
         public int DocumentDetailId { get; set; }
 
-        public PersonalDetail PersonalDetail { get; set; }
-        public DocumentDetail DocumentDetail { get; set; }
+        public virtual PersonalDetail PersonalDetail { get; set; }
+        public virtual DocumentDetail DocumentDetail { get; set; }
     }
 }

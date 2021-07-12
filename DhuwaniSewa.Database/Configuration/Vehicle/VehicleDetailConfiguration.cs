@@ -14,6 +14,10 @@ namespace DhuwaniSewa.Database.Configuration
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(a => a.RegistrationNumber).IsRequired().HasMaxLength(100);
+            builder.Property(a => a.MaxWeight).IsRequired();
+            builder.Property(a => a.WeightUnit).IsRequired();
+            builder.Property(a => a.WheelType).IsRequired();
+            builder.Property(a => a.Model).HasMaxLength(250);
 
             builder.HasOne<Choice>(a => a.Brand).
                 WithMany(b => b.VehicleDetailBrand).

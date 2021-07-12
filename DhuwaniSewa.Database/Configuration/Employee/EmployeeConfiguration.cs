@@ -13,8 +13,8 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(a => a.IsActive).IsRequired().HasDefaultValue(true);
             builder.Property(a => a.Desigination).IsRequired();
 
-            builder.HasOne(a => a.AppUsers).WithOne(b => b.Employee).
-                HasForeignKey<Employee>(c => c.UserId).
+            builder.HasOne(a => a.AppUsers).WithMany(b => b.Employee).
+                HasForeignKey(c => c.UserId).
                 HasConstraintName("FK_Employee_To_AppUser").IsRequired();
         }
     }
