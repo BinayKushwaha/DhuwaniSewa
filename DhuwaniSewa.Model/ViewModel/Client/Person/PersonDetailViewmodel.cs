@@ -2,6 +2,7 @@
 using DhuwaniSewa.Model.DbEntities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -16,7 +17,9 @@ namespace DhuwaniSewa.Model.ViewModel
         }
         public int PersondetailId { get; set; }
         public int UserId { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public IList<ContactDetailViewModel> ContactDetails { get; set; }

@@ -13,6 +13,7 @@ namespace DhuwaniSewa.Database.Configuration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
+
             builder.Property(a => a.IsCompnay).IsRequired().HasDefaultValue(false);
             builder.Property(a => a.IsEmployee).IsRequired().HasDefaultValue(false);
             builder.Property(a => a.Active).IsRequired().HasDefaultValue(true);

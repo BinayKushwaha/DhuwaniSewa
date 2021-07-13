@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DhuwaniSewa.Model.DbEntities
@@ -10,7 +11,6 @@ namespace DhuwaniSewa.Model.DbEntities
     {
         public ApplicationUsers() : base() { }
         public bool IsActive { get; set; }
-
         public virtual AppUsers  AppUsers{ get; set; }
         public RefreshToken RefreshToken { get; set; }
     }

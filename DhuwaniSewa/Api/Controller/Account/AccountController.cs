@@ -14,7 +14,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
 {
     [Route("api/account")]
     [ApiController]
-
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class AccountController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -27,9 +27,9 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("register")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserViewModel request)
+        public async Task<IActionResult> Register(RegisterUserViewModel request)
         {
             try
             {
