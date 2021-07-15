@@ -91,6 +91,11 @@ D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSe
 D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.dll
 D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.pdb
 D:\Project\Startup\Wheeler\Wheeler\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.genruntimeconfig.cache
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.AssemblyInfoInputs.cache
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.AssemblyInfo.cs
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.csproj.CoreCompileInputs.cache
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.MvcApplicationPartsAssemblyInfo.cache
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.csproj.AssemblyReference.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Web.exe
@@ -99,6 +104,8 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\D
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Web.runtimeconfig.dev.json
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Web.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Web.pdb
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\EntityFramework.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\Humanizer.dll
@@ -169,11 +176,6 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\D
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\DhuwaniSewa.Utils.pdb
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.csproj.AssemblyReference.cache
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.AssemblyInfoInputs.cache
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.AssemblyInfo.cs
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.csproj.CoreCompileInputs.cache
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.MvcApplicationPartsAssemblyInfo.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\staticwebassets\DhuwaniSewa.Web.StaticWebAssets.Manifest.cache
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\staticwebassets\DhuwaniSewa.Web.StaticWebAssets.xml
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\scopedcss\bundle\DhuwaniSewa.Web.styles.css
@@ -182,5 +184,3 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\D
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.dll
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\obj\Debug\netcoreapp3.1\DhuwaniSewa.Web.genruntimeconfig.cache
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\AutoMapper.dll
-D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

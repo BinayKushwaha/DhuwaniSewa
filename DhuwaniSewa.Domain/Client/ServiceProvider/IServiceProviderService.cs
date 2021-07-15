@@ -13,5 +13,7 @@ namespace DhuwaniSewa.Domain
         IList<ServiceProviderViewModel> GetAll();
         Task<ServiceProviderViewModel> Get(int Id);
         void Delete(int Id);
+        Task<ServiceProviderContactPersonViewModel> AddContactPerson(ServiceProviderContactPersonViewModel request);
+        Task<ServiceProviderContactPersonViewModel> UpdateContactPerson(ServiceProviderContactPersonViewModel request);
     }
 }

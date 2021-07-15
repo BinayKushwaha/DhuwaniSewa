@@ -260,9 +260,42 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("MobileNumberConfirmed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.HasKey("Id");
 
                     b.ToTable("ContactDetail");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ContactPerson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId")
+                        .IsUnique();
+
+                    b.ToTable("ContactPerson");
                 });
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
@@ -385,9 +418,6 @@ namespace DhuwaniSewa.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -399,12 +429,9 @@ namespace DhuwaniSewa.Database.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("MiddleName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("PersonalDetails");
                 });
@@ -529,6 +556,24 @@ namespace DhuwaniSewa.Database.Migrations
                     b.ToTable("ServiceProvider");
                 });
 
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderContactPerson", b =>
+                {
+                    b.Property<int>("ContactPersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceProviderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContactPersonId", "ServiceProviderId");
+
+                    b.HasIndex("ContactPersonId")
+                        .IsUnique();
+
+                    b.HasIndex("ServiceProviderId");
+
+                    b.ToTable("ServiceProviderContactPerson");
+                });
+
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderVehicleDetail", b =>
                 {
                     b.Property<int>("ServiceProviderId")
@@ -585,6 +630,22 @@ namespace DhuwaniSewa.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ServiceSeeker");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.UserPersonDetail", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "PersonId");
+
+                    b.HasIndex("PersonId")
+                        .IsUnique();
+
+                    b.ToTable("UserPersonDetail");
                 });
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.VehicleDetail", b =>
@@ -809,6 +870,18 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Navigation("AppUsers");
                 });
 
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ContactPerson", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.PersonalDetail", "PersonalDetail")
+                        .WithOne("ContactPerson")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ContactPerson", "PersonId")
+                        .HasConstraintName("FK_ContactPerson_Person")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalDetail");
+                });
+
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.Customer", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUser")
@@ -827,18 +900,6 @@ namespace DhuwaniSewa.Database.Migrations
                         .WithMany("Employee")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Employee_To_AppUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUsers");
-                });
-
-            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
-                {
-                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "AppUsers")
-                        .WithMany("PersonalDetail")
-                        .HasForeignKey("AppUserId")
-                        .HasConstraintName("FK_PersonalDetail_To_AppUsers")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -911,6 +972,27 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderContactPerson", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ContactPerson", "ContactPerson")
+                        .WithOne("ServiceProviderContactPerson")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.ServiceProviderContactPerson", "ContactPersonId")
+                        .HasConstraintName("FK_ServiceProviderContactPerson_ContactPerson")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.ServiceProvider", "ServiceProvider")
+                        .WithMany("ServiceProviderContactPerson")
+                        .HasForeignKey("ServiceProviderId")
+                        .HasConstraintName("FK_SerciceProvider_ServiceProviderContactPerson")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContactPerson");
+
+                    b.Navigation("ServiceProvider");
+                });
+
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProviderVehicleDetail", b =>
                 {
                     b.HasOne("DhuwaniSewa.Model.DbEntities.ServiceProvider", "ServiceProvider")
@@ -942,6 +1024,27 @@ namespace DhuwaniSewa.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.UserPersonDetail", b =>
+                {
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.PersonalDetail", "PersonalDetail")
+                        .WithOne("AppUsers")
+                        .HasForeignKey("DhuwaniSewa.Model.DbEntities.UserPersonDetail", "PersonId")
+                        .HasConstraintName("FK_UserPersonDetail_Persondetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DhuwaniSewa.Model.DbEntities.AppUsers", "User")
+                        .WithMany("PersonalDetail")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("FK_User_UserPersonDetail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalDetail");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.VehicleDetail", b =>
@@ -1064,6 +1167,11 @@ namespace DhuwaniSewa.Database.Migrations
                     b.Navigation("PersonalDetailContactDetails");
                 });
 
+            modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ContactPerson", b =>
+                {
+                    b.Navigation("ServiceProviderContactPerson");
+                });
+
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.DocumentDetail", b =>
                 {
                     b.Navigation("PersonalDetailDocumentDetails");
@@ -1071,6 +1179,10 @@ namespace DhuwaniSewa.Database.Migrations
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.PersonalDetail", b =>
                 {
+                    b.Navigation("AppUsers");
+
+                    b.Navigation("ContactPerson");
+
                     b.Navigation("PersonalDetailContactDetails");
 
                     b.Navigation("PersonalDetailDocumentDetails");
@@ -1078,6 +1190,8 @@ namespace DhuwaniSewa.Database.Migrations
 
             modelBuilder.Entity("DhuwaniSewa.Model.DbEntities.ServiceProvider", b =>
                 {
+                    b.Navigation("ServiceProviderContactPerson");
+
                     b.Navigation("ServiceProviderVehicleDetail");
                 });
 

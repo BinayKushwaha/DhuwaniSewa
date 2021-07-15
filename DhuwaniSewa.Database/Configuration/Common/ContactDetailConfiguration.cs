@@ -12,7 +12,9 @@ namespace DhuwaniSewa.Database.Configuration
         public void Configure(EntityTypeBuilder<ContactDetail> builder)
         {
             builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Property(a => a.Id).ValueGeneratedOnAdd();
+            builder.Property(a => a.EmailConfirmed).HasDefaultValue(false);
+            builder.Property(a => a.MobileNumberConfirmed).HasDefaultValue(false);
         }
     }
 }

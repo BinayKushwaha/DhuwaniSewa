@@ -9,6 +9,7 @@ namespace DhuwaniSewa.Model.DbEntities
         public ServiceProvider()
         {
             ServiceProviderVehicleDetail = new HashSet<ServiceProviderVehicleDetail>();
+            ServiceProviderContactPerson = new HashSet<ServiceProviderContactPerson>();
         }
         public int Id { get; set; }
         public bool Active { get; set; }
@@ -17,5 +18,6 @@ namespace DhuwaniSewa.Model.DbEntities
         public string DhuwaniSewaId { get; set; }
         public virtual AppUsers AppUser { get; set; }
         public virtual ICollection<ServiceProviderVehicleDetail> ServiceProviderVehicleDetail { get; set; }
+        public virtual ICollection<ServiceProviderContactPerson> ServiceProviderContactPerson { get; set; }
     }
 }

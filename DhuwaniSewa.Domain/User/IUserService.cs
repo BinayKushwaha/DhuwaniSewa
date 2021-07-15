@@ -9,5 +9,6 @@ namespace DhuwaniSewa.Domain
     public interface IUserService
     {
         Task<RegisterUserViewModel> Register(RegisterUserViewModel model);
+        Task<UserPersonViewModel> SaveUserPerson(UserPersonViewModel request);
     }
 }

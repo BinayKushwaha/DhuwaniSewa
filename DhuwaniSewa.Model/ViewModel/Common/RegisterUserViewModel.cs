@@ -12,11 +12,13 @@ namespace DhuwaniSewa.Model.ViewModel
         public int Id { get; set; }
         [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
         public string AppUserId { get; set; }
         public bool IsCompany { get; set; }
         public bool IsEmployee { get; set; }
         public string Email { get; set; }
+        [Required]
         public bool IsServiceProvider { get; set; }
         public string MobileNumber { get; set; }
         [Required]

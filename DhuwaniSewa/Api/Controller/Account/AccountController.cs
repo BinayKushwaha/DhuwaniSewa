@@ -49,6 +49,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginViewModel request)
         {
@@ -59,7 +60,11 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 var result = await _authenticationService.Login(request);
                 return Ok(ResponseModel.Success("Login successfull.",result));
             }
-            catch(Exception ex)
+            catch(CustomException ex)
+            {
+                return Ok(ResponseModel.Info(ex.Message));
+            }
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
             }

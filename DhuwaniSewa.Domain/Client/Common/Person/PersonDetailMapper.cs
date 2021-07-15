@@ -49,7 +49,6 @@ namespace DhuwaniSewa.Domain
             {
                 if(destination==null)
                     destination = new PersonalDetail();
-                destination.AppUserId = source.UserId;
                 destination.FirstName = source.FirstName;
                 destination.MiddleName = source.MiddleName;
                 destination.LastName = source.LastName;

@@ -13,7 +13,7 @@ namespace DhuwaniSewa.Model.DbEntities
             ServiceSeeker = new HashSet<ServiceSeeker>();
             Employee = new HashSet<Employee>();
             CompanyDetail = new HashSet<CompanyDetail>();
-            PersonalDetail = new HashSet<PersonalDetail>();
+            PersonalDetail = new HashSet<UserPersonDetail>();
         }
         public int Id { get; set; }
         public bool Active { get; set; }
@@ -25,7 +25,7 @@ namespace DhuwaniSewa.Model.DbEntities
         public virtual ApplicationUsers Users { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Employee> Employee { get; set; }
-        public virtual ICollection<PersonalDetail> PersonalDetail { get; set; }
+        public virtual ICollection<UserPersonDetail> PersonalDetail { get; set; }
         public virtual ICollection<CompanyDetail> CompanyDetail { get; set; }
         public virtual ICollection<ServiceProvider> ServiceProvider { get; set; }
         public virtual ICollection<ServiceSeeker> ServiceSeeker { get; set; }

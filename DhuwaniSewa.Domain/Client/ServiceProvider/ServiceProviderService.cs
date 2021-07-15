@@ -24,6 +24,11 @@ namespace DhuwaniSewa.Domain
         private readonly IRepositoryService<PersonalDetailDocumentDetail, int> _personDocsRepo;
         private readonly IRepositoryService<PersonalDetailContactDetail, int> _personContactRepo;
         private readonly IRepositoryService<ServiceProviderVehicleDetail, int> _serviceProviderVehicleRepo;
+        private readonly IRepositoryService<ServiceProviderContactPerson, int> _serviceProviderContactPersonRepo;
+        private readonly IRepositoryService<PersonalDetail, int> _persondetailRepo;
+        private readonly IRepositoryService<ContactDetail, int> _contactDetailRepo;
+        private readonly IUserService _userService;
+        private readonly IRepositoryService<DocumentDetail, int> _documentRepo;
         public ServiceProviderService(
             IPersonDetailService personDetailService,
             IRepositoryService<ServiceProvider, int> serviceProviderRepo,
@@ -33,7 +38,12 @@ namespace DhuwaniSewa.Domain
             IUnitOfWork unitOfWork,
             IRepositoryService<PersonalDetailDocumentDetail, int> personDocsRepo,
             IRepositoryService<PersonalDetailContactDetail, int> personContactRepo,
-            IRepositoryService<ServiceProviderVehicleDetail, int> serviceProviderVehicleRepo
+            IRepositoryService<ServiceProviderVehicleDetail, int> serviceProviderVehicleRepo,
+            IRepositoryService<ServiceProviderContactPerson, int> serviceProviderContactPersonRepo,
+            IRepositoryService<PersonalDetail, int> persondetailRepo,
+            IRepositoryService<ContactDetail, int> contactDetailRepo,
+            IUserService userService,
+            IRepositoryService<DocumentDetail, int> documentRepo
             )
         {
             this._serviceProviderRepo = serviceProviderRepo;
@@ -45,6 +55,10 @@ namespace DhuwaniSewa.Domain
             this._personDocsRepo = personDocsRepo;
             this._personContactRepo = personContactRepo;
             this._serviceProviderVehicleRepo = serviceProviderVehicleRepo;
+            this._persondetailRepo = persondetailRepo;
+            this._contactDetailRepo = contactDetailRepo;
+            this._serviceProviderContactPersonRepo = serviceProviderContactPersonRepo;
+            this._userService = userService;
         }
         public async Task<int> Save(ServiceProviderViewModel request)
         {
@@ -52,8 +66,6 @@ namespace DhuwaniSewa.Domain
             {
                 try
                 {
-                    request.PersonDetail.UserId = request.UserId;
-                    await _personDetailService.Save(request.PersonDetail);
                     var serviceProvider = _mapper.MapToEntity(request);
                     await _serviceProviderRepo.AddAsync(serviceProvider);
                     await _unitOfWork.CommitAsync();
@@ -76,7 +88,7 @@ namespace DhuwaniSewa.Domain
                     ThenInclude(a => a.PersonalDetail).
                     Where(b => b.Active).ToList();
 
-                var personIds = serviceProviders.SelectMany(a => a.AppUser.PersonalDetail.Select(s => s.Id)).ToList();
+                var personIds = serviceProviders.SelectMany(a => a.AppUser.PersonalDetail.Select(s => s.PersonalDetail.Id)).ToList();
                 var serviceProvidersIds = serviceProviders.Select(a => a.Id).ToList();
                 var companyIds = serviceProviders.SelectMany(a => a.AppUser.CompanyDetail.Select(s => s.Id)).ToList();
 
@@ -106,7 +118,7 @@ namespace DhuwaniSewa.Domain
                         };
                     else
                     {
-                        var personId = serviceProvider.AppUser.PersonalDetail.FirstOrDefault().Id;
+                        var personId = serviceProvider.AppUser.PersonalDetail.FirstOrDefault().PersonalDetail.Id;
                         var personDetail = serviceProvider.AppUser.PersonalDetail.FirstOrDefault();
                         var contactDetails = personContacts.Where(a => a.PersonalDetailId == personId).
                             Select(a => a.ContactDetail).ToList();
@@ -117,18 +129,18 @@ namespace DhuwaniSewa.Domain
 
                         model.PersonDetail = new PersonDetailViewmodel()
                         {
-                            PersondetailId=personDetail.Id,
-                            FirstName = personDetail.FirstName,
-                            MiddleName = personDetail.MiddleName,
-                            LastName = personDetail.LastName,
-                            UserId = personDetail.AppUserId
+                            PersondetailId = personDetail.PersonalDetail.Id,
+                            FirstName = personDetail.PersonalDetail.FirstName,
+                            MiddleName = personDetail.PersonalDetail.MiddleName,
+                            LastName = personDetail.PersonalDetail.LastName,
+                            UserId = personDetail.UserId
                         };
 
                         foreach (var contact in contactDetails)
                         {
                             model.PersonDetail.ContactDetails.Add(new ContactDetailViewModel()
                             {
-                                ContactDetailId=contact.Id,
+                                ContactDetailId = contact.Id,
                                 Email = contact.Email,
                                 Number = contact.ContactNumber
                             });
@@ -138,7 +150,7 @@ namespace DhuwaniSewa.Domain
                         {
                             model.PersonDetail.Documents.Add(new DocumentDetailViewModel()
                             {
-                                DocumentDetailId=document.Id,
+                                DocumentDetailId = document.Id,
                                 Type = document.Type,
                                 RegistrationNumber = document.RegistrationNumber,
                                 IssuedDistrict = document.IssuedDistrict
@@ -148,7 +160,7 @@ namespace DhuwaniSewa.Domain
                         {
                             model.VehicleDetails.Add(new VehicleDetailViewModel()
                             {
-                                VehicleDetailId=vehicle.Id,
+                                VehicleDetailId = vehicle.Id,
                                 TypeId = vehicle.TypeId,
                                 RegistrationNumber = vehicle.RegistrationNumber,
                                 WheelType = vehicle.WheelType,
@@ -219,6 +231,100 @@ namespace DhuwaniSewa.Domain
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+        public async Task<ServiceProviderContactPersonViewModel> AddContactPerson(ServiceProviderContactPersonViewModel request)
+        {
+            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    var contactPerson = new ServiceProviderContactPerson();
+                    int personId = 0;
+                    var personDetail = new PersonalDetail();
+
+                    personDetail.FirstName = request.FirstName;
+                    personDetail.LastName = request.LastName;
+                    foreach(var contact in request.ContactDetails)
+                    {
+                        personDetail.PersonalDetailContactDetails.Add(new PersonalDetailContactDetail()
+                        {
+                            ContactDetail = new ContactDetail()
+                            {
+                                ContactNumber = contact.Number,
+                                Email = contact.Email
+                            }
+                        });
+                    }
+                    personDetail.PersonalDetailDocumentDetails.Add(new PersonalDetailDocumentDetail()
+                    {
+                        DocumentDetail = new DocumentDetail()
+                        {
+                            Type = nameof(DocumentType.Ctitzenship),
+                            RegistrationNumber = request.CitizenshipNumber,
+                            IssuedDistrict = request.CitizenshipIssuedDistrict
+                        }
+                    });
+                    await _persondetailRepo.AddAsync(personDetail);
+                    await _unitOfWork.CommitAsync();
+
+                    personId = personDetail.Id;
+
+                    contactPerson.ServiceProviderId = request.ServiceProviderId;
+                    contactPerson.ContactPerson=new ContactPerson() { 
+                        PersonId=personId
+                    };
+                    await _serviceProviderContactPersonRepo.AddAsync(contactPerson);
+                    await _unitOfWork.CommitAsync();
+                    await transaction.CommitAsync();
+
+                    request.ContactPersonId = contactPerson.ContactPersonId;
+                    return request;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+        public async Task<ServiceProviderContactPersonViewModel> UpdateContactPerson(ServiceProviderContactPersonViewModel request)
+        {
+            using (var transaction=await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    var contactPerson =await _serviceProviderContactPersonRepo.GetQueryable().Include(a=>a.ContactPerson).FirstOrDefaultAsync(a => a.ServiceProviderId == request.ServiceProviderId 
+                    && a.ContactPersonId == request.ContactPersonId && a.ContactPerson.Active);
+                    if (contactPerson == null)
+                        throw new ArgumentNullException($"Contact person with ServiceProviderId: {request.ServiceProviderId} and contact personId: {request.ContactPersonId}");
+                    var personDetail =await _persondetailRepo.GetQueryable().Include(a => a.PersonalDetailContactDetails)
+                        .Include(a => a.PersonalDetailDocumentDetails).FirstOrDefaultAsync(a=>a.Id==contactPerson.ContactPersonId);
+
+                    personDetail.FirstName = request.FirstName;
+                    personDetail.LastName = request.LastName;
+                    var contactDetails=personDetail.PersonalDetailContactDetails;
+                    foreach(var contact in request.ContactDetails)
+                    {
+                        var updateContact = contactDetails.FirstOrDefault(a => a.ContactDetailId == contact.ContactDetailId).ContactDetail;
+                        if (updateContact == null)
+                            throw new ArgumentNullException($"Contact detail with id: {contact.ContactDetailId} does not exist.");
+                        updateContact.ContactNumber = contact.Number;
+                        updateContact.Email = contact.Email;
+                        _contactDetailRepo.Update(updateContact);
+                    }
+
+                    var citizenshipDoc = personDetail.PersonalDetailDocumentDetails.FirstOrDefault(a=>a.DocumentDetail.Type==nameof(DocumentType.Ctitzenship)).DocumentDetail;
+                    citizenshipDoc.RegistrationNumber = request.CitizenshipNumber;
+                    citizenshipDoc.IssuedDistrict = request.CitizenshipIssuedDistrict;
+                    _documentRepo.Update(citizenshipDoc);
+
+                    return request;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
     }

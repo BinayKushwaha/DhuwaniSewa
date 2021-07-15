@@ -45,7 +45,7 @@ namespace DhuwaniSewa.Domain
                 }
                 else
                 {
-                    destination.PersonDetail = _personMapper.MapToViewmodel(source.AppUser.PersonalDetail.FirstOrDefault());
+                    destination.PersonDetail = _personMapper.MapToViewmodel(source.AppUser.PersonalDetail.FirstOrDefault().PersonalDetail);
                 }
                 foreach (var vehicle in source.ServiceProviderVehicleDetail)
                 {
@@ -70,6 +70,7 @@ namespace DhuwaniSewa.Domain
             {
                 if (destination == null)
                     destination = new ServiceProvider();
+                destination.UserId = source.UserId;
                 destination.Active = source.Active;
                 destination.DetailsCorrectAgreed = source.DetailsCorrectAggreed;
                 if (source.ServiceProviderId == 0)
@@ -78,25 +79,6 @@ namespace DhuwaniSewa.Domain
                     string fs = _fiscalYearService.GetCurrent().Result;
                     destination.DhuwaniSewaId = string.Format(DhuwaniSewaIdFormat.ServiceProviderIdFormat, fs, sn);
                 }
-                foreach (var vehicle in source.VehicleDetails)
-                {
-                    destination.ServiceProviderVehicleDetail.Add(
-                            new ServiceProviderVehicleDetail()
-                            {
-                                VehicleDetail = new VehicleDetail()
-                                {
-                                    RegistrationNumber = vehicle.RegistrationNumber,
-                                    TypeId = vehicle.TypeId,
-                                    BrandId = vehicle.BrandId,
-                                    MaxWeight=vehicle.MaxWeight,
-                                    WeightUnit=vehicle.WeightUnit,
-                                    WheelType=vehicle.WheelType,
-                                    Model=vehicle.Model
-                                }
-                            }
-                        );
-                }
-                destination.UserId = source.UserId;
                 return destination;
             }
             catch (Exception ex)

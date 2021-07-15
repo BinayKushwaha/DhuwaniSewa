@@ -21,6 +21,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
         {
             this._serviceProviderService = serviceProviderService;
         }
+
         [HttpPost]
         [Route("post")]
         public async Task<IActionResult> Save([FromBody] ServiceProviderViewModel request)
@@ -38,6 +39,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
 
             }
         }
+
         [HttpPut]
         [Route("put")]
         public IActionResult update([FromBody] ServiceProviderViewModel request)
@@ -55,6 +57,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
 
             }
         }
+
         [HttpGet]
         [Route("list")]
         [AllowAnonymous]
@@ -70,6 +73,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
             }
         }
+
         [HttpGet]
         [Route("get/{id}")]
         public async Task<IActionResult> Get(int Id)
@@ -82,6 +86,41 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
             catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
+            }
+        }
+
+        [HttpPost]
+        [Route("addcontactperson")]
+        public async Task<IActionResult> SaveContactPerson(ServiceProviderContactPersonViewModel request) 
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                var result = await _serviceProviderService.AddContactPerson(request);
+                return Ok(ResponseModel.Success("Contact person added successfully.", result));
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
+                throw;
+            }
+        }
+        [HttpPut]
+        [Route("updatecontactperson")]
+        public async Task<IActionResult> UpdateContactPerson(ServiceProviderContactPersonViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                var result = await _serviceProviderService.UpdateContactPerson(request);
+                return Ok(ResponseModel.Success("Contact person updated successfully.", result));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
+                throw;
             }
         }
     }

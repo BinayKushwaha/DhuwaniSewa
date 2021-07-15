@@ -13,6 +13,8 @@ namespace DhuwaniSewa.Model.DbEntities
         public int Id { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
+        public bool MobileNumberConfirmed { get; set; }
+        public bool EmailConfirmed { get; set; }
         public ICollection<PersonalDetailContactDetail> PersonalDetailContactDetails { get; set; }
     }
 }

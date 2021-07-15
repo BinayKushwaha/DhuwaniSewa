@@ -19,20 +19,23 @@ namespace DhuwaniSewa.Domain
         private readonly UserManager<ApplicationUsers> _userManager;
         private readonly IPersonDetailService _personDetailService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoryService<UserPersonDetail, int> _userPersonRepo;
         public UserService(IRepositoryService<AppUsers, int> userRepository,
             IUnitOfWork unitOfWork,
             UserManager<ApplicationUsers> userManager,
-            IPersonDetailService personDetailService
+            IPersonDetailService personDetailService,
+            IRepositoryService<UserPersonDetail, int> userPersonRepo
             )
         {
             this._userRepository = userRepository;
             this._unitOfWork = unitOfWork;
             this._userManager = userManager;
             this._personDetailService = personDetailService;
+            this._userPersonRepo = userPersonRepo;
         }
         public async Task<RegisterUserViewModel> Register(RegisterUserViewModel model)
         {
-            using (var transaction =await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
             {
                 try
                 {
@@ -101,7 +104,15 @@ namespace DhuwaniSewa.Domain
                         Number = model.MobileNumber,
                         Email = model.Email
                     });
-                    await _personDetailService.Save(personModel);
+                    var personId= await _personDetailService.Save(personModel);
+                    
+                    var userPersonModel = new UserPersonViewModel()
+                    {
+                        UserId = appUsers.Id,
+                        PersonId = personId
+                    };
+                    await SaveUserPerson(userPersonModel);
+
                     model.Id = appUsers.Id;
                     await transaction.CommitAsync();
                     return model;
@@ -113,6 +124,16 @@ namespace DhuwaniSewa.Domain
                 }
             }
         }
+        public async Task<UserPersonViewModel> SaveUserPerson(UserPersonViewModel request)
+        {
+            var userPerson = new UserPersonDetail();
+            userPerson.UserId = request.UserId;
+            userPerson.PersonId = request.PersonId;
+            await _userPersonRepo.AddAsync(userPerson);
+            await _unitOfWork.CommitAsync();
+            return request;
+        }
+        #region Helper
         private bool IsEmail(string email)
         {
             return Regex.IsMatch(email,
@@ -124,5 +145,6 @@ namespace DhuwaniSewa.Domain
             Regex reg = new Regex(@"^[0-9]{10}$");
             return reg.IsMatch(mobileNumber);
         }
+        #endregion
     }
 }

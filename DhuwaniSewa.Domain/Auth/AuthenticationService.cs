@@ -43,13 +43,13 @@ namespace DhuwaniSewa.Domain
             {
                 ApplicationUsers user = await _userManager.FindByNameAsync(request.UserName);
                 if (user == null)
-                    return ResponseModel.Info("User not found.");
+                    throw new CustomException("Invalid inputs.");
                 if (!await _userManager.CheckPasswordAsync(user, request.Password))
-                    return ResponseModel.Info("Username and password are not correct.");
+                    throw new CustomException("Username and password are not correct.");
                   
                 AuthenticationResult result = await CreateJwtTokenAsync(user);
                 if (!result.Succeeded)
-                    ResponseModel.Error("Failed to create token");
+                    throw new Exception("Failed to create token"); 
                 var token = new RefreshTokenViewModel();
                 token.AccessToken = result.Token;
                 token.RefreshToken = result.RefreshToken;
@@ -229,6 +229,7 @@ namespace DhuwaniSewa.Domain
                 };
                 var result=await AddUpdateRefreshToken(refreshToken);
                 authenticationResult.RefreshToken = result.RefreshToken;
+                authenticationResult.Succeeded = true;
                 return authenticationResult;
             }
             catch (Exception ex)

@@ -16,9 +16,9 @@ namespace DhuwaniSewa.Model.DbEntities
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public int AppUserId { get; set; }
-        public virtual AppUsers  AppUsers { get; set; }
+        public virtual UserPersonDetail  AppUsers { get; set; }
         public virtual ICollection<PersonalDetailDocumentDetail> PersonalDetailDocumentDetails { get; set; }
         public virtual ICollection<PersonalDetailContactDetail> PersonalDetailContactDetails { get; set; }
+        public virtual ContactPerson ContactPerson { get; set; }
     }
 }
