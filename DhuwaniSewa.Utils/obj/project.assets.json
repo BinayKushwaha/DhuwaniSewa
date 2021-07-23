@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
       "projectName": "DhuwaniSewa.Utils",
-      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Utils\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

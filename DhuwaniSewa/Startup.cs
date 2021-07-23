@@ -38,7 +38,7 @@ namespace DhuwaniSewa
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors();
             app.UseRouting();
 
             IdentityDataInitializer.SeedIdentity(userManager, roleManager);
@@ -46,19 +46,18 @@ namespace DhuwaniSewa
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             
             app.UseEndpoints(endpoints =>
             {
-                app.UseEndpoints(endpoints =>
+                endpoints.MapGet("/", async context =>
                 {
-                    endpoints.MapControllers();
+                    await context.Response.WriteAsync("Hello! I am DhuwaniSewa.");
                 });
-                //endpoints.MapControllerRoute(
-                //    name:"default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}"
-                //    );
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "api/{controller}/{action}/{id?}");
             });
 
 

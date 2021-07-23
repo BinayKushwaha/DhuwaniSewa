@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4HYONKfrBMUGhG6zCSGUPPQhu5lhzI261GnYfGJ0+3Ak9vBiybiZwu1XLcUdBbDU7t3mkB36QE17zD5NnTzofg==",
+  "dgSpecHash": "oqd8hpVqFxlXB1xL8WOs3VKB8AxyOrAWqXA7MubbTRlFvTcrkysCe3puS8uEHk9n9y2KpJSf1IQTajdDN4HH8w==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
+  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

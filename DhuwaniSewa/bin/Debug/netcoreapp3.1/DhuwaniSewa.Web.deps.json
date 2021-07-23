@@ -1610,14 +1610,6 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "DhuwaniSewa.CrossCutting/1.0.0": {
-        "runtime": {
-          "DhuwaniSewa.CrossCutting.dll": {}
-        },
-        "compile": {
-          "DhuwaniSewa.CrossCutting.dll": {}
-        }
-      },
       "DhuwaniSewa.Database/1.0.0": {
         "dependencies": {
           "DhuwaniSewa.Model": "1.0.0",
@@ -1664,7 +1656,6 @@
       "DhuwaniSewa.Model/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "DhuwaniSewa.CrossCutting": "1.0.0",
           "Microsoft.Extensions.Identity.Stores": "5.0.5"
         },
         "runtime": {
@@ -4063,11 +4054,6 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
-    },
-    "DhuwaniSewa.CrossCutting/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "DhuwaniSewa.Database/1.0.0": {
       "type": "project",

@@ -1,0 +1,9 @@
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.deps.json
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfoInputs.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfo.cs
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb

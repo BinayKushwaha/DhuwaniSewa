@@ -1680,22 +1680,11 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "DhuwaniSewa.CrossCutting/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/DhuwaniSewa.CrossCutting.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DhuwaniSewa.CrossCutting.dll": {}
-        }
-      },
       "DhuwaniSewa.Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "DhuwaniSewa.CrossCutting": "1.0.0",
           "Microsoft.Extensions.Identity.Stores": "5.0.5"
         },
         "compile": {
@@ -6329,11 +6318,6 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "DhuwaniSewa.CrossCutting/1.0.0": {
-      "type": "project",
-      "path": "../DhuwaniSewa.CrossCutting/DhuwaniSewa.CrossCutting.csproj",
-      "msbuildProject": "../DhuwaniSewa.CrossCutting/DhuwaniSewa.CrossCutting.csproj"
-    },
     "DhuwaniSewa.Model/1.0.0": {
       "type": "project",
       "path": "../DhuwaniSewa.Model/DhuwaniSewa.Model.csproj",
@@ -6357,11 +6341,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
       "projectName": "DhuwaniSewa.Database",
-      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Database\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6378,8 +6362,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
-              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
+            "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
+              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
             }
           }
         }

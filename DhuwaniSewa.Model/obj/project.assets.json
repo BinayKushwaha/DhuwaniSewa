@@ -180,16 +180,6 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
-      },
-      "DhuwaniSewa.CrossCutting/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/DhuwaniSewa.CrossCutting.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DhuwaniSewa.CrossCutting.dll": {}
-        }
       }
     }
   },
@@ -676,17 +666,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "DhuwaniSewa.CrossCutting/1.0.0": {
-      "type": "project",
-      "path": "../DhuwaniSewa.CrossCutting/DhuwaniSewa.CrossCutting.csproj",
-      "msbuildProject": "../DhuwaniSewa.CrossCutting/DhuwaniSewa.CrossCutting.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AutoMapper >= 10.1.1",
-      "DhuwaniSewa.CrossCutting >= 1.0.0",
       "Microsoft.Extensions.Identity.Stores >= 5.0.5"
     ]
   },
@@ -696,11 +680,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
       "projectName": "DhuwaniSewa.Model",
-      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Model\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -716,11 +700,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj": {
-              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.CrossCutting\\DhuwaniSewa.CrossCutting.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

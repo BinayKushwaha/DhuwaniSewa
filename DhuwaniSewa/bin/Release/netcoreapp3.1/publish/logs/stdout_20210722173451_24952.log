@@ -1,0 +1,29 @@
+crit: Microsoft.AspNetCore.Hosting.Diagnostics[6]
+      Application startup exception
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at DhuwaniSewa.IoC.AddIdentityServices.ConfigureService(IServiceCollection services, IConfiguration configuration) in D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\Extension\AddIdentityServices.cs:line 31
+   at DhuwaniSewa.IoC.IServiceCollectionExtension.AddCustomServices(IServiceCollection services, IConfiguration configuration) in D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\IServiceCollectionExtension.cs:line 17
+   at DhuwaniSewa.Startup.ConfigureServices(IServiceCollection services) in D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa\Startup.cs:line 31
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.InvokeCore(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass9_0.<Invoke>g__Startup|0(IServiceCollection serviceCollection)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.Invoke(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.<>c__DisplayClass8_0.<Build>b__0(IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.UseStartup(Type startupType, HostBuilderContext context, IServiceCollection services)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass13_0.<UseStartup>b__2(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISSetupFilter.<>c__DisplayClass4_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://127.0.0.1:42667
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa\bin\Release\netcoreapp3.1\publish
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...

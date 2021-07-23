@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Application\\DhuwaniSewa.Application.csproj",
+      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Application\\DhuwaniSewa.Application.csproj",
       "projectName": "DhuwaniSewa.Application",
-      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Application\\DhuwaniSewa.Application.csproj",
+      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Application\\DhuwaniSewa.Application.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Application\\obj\\",
+      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -60,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

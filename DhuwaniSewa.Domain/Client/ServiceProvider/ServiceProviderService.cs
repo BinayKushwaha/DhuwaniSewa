@@ -88,9 +88,11 @@ namespace DhuwaniSewa.Domain
                     ThenInclude(a => a.PersonalDetail).
                     Where(b => b.Active).ToList();
 
-                var personIds = serviceProviders.SelectMany(a => a.AppUser.PersonalDetail.Select(s => s.PersonalDetail.Id)).ToList();
+                var personIds = serviceProviders.SelectMany(a => a.AppUser.PersonalDetail.Select(s => s.PersonId)).ToList();
                 var serviceProvidersIds = serviceProviders.Select(a => a.Id).ToList();
                 var companyIds = serviceProviders.SelectMany(a => a.AppUser.CompanyDetail.Select(s => s.Id)).ToList();
+
+                var personDetails = _persondetailRepo.GetQueryable().Where(a => personIds.Contains(a.Id)).ToList();
 
                 var personDocuments = _personDocsRepo.GetQueryable().Include(a => a.DocumentDetail).
                     Where(a => personIds.Contains(a.PersonDetailId)).ToList();
@@ -118,8 +120,8 @@ namespace DhuwaniSewa.Domain
                         };
                     else
                     {
-                        var personId = serviceProvider.AppUser.PersonalDetail.FirstOrDefault().PersonalDetail.Id;
-                        var personDetail = serviceProvider.AppUser.PersonalDetail.FirstOrDefault();
+                        var personId = serviceProvider.AppUser.PersonalDetail.FirstOrDefault().PersonId;
+                        var personDetail = personDetails.FirstOrDefault(a=>a.Id==personId);
                         var contactDetails = personContacts.Where(a => a.PersonalDetailId == personId).
                             Select(a => a.ContactDetail).ToList();
                         var documentDetails = personDocuments.Where(a => a.PersonDetailId == personId).
@@ -129,11 +131,11 @@ namespace DhuwaniSewa.Domain
 
                         model.PersonDetail = new PersonDetailViewmodel()
                         {
-                            PersondetailId = personDetail.PersonalDetail.Id,
-                            FirstName = personDetail.PersonalDetail.FirstName,
-                            MiddleName = personDetail.PersonalDetail.MiddleName,
-                            LastName = personDetail.PersonalDetail.LastName,
-                            UserId = personDetail.UserId
+                            PersondetailId = personDetail.Id,
+                            FirstName = personDetail.FirstName,
+                            MiddleName = personDetail.MiddleName,
+                            LastName = personDetail.LastName,
+                            UserId = personDetail.AppUsers.UserId
                         };
 
                         foreach (var contact in contactDetails)

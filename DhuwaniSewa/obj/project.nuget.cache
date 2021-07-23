@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0tA8wX2bEIP9341txmmX1GDiCYfq9yaALuRZ052CEEjpGbgl1Ryl9Xsjb7MyrF0lOu3XqNZWa5CDIyqOmd+51g==",
+  "dgSpecHash": "7f6QjxdM0tPXfVn+Lw/FehAOpKUzIyHsoEXVMpt5RukKRXKcrLK5SUL3QWw0uatMYgcENe+rjxFD0NBoYiFxoQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
+  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa\\DhuwaniSewa.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

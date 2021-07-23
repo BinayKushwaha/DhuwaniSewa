@@ -89,7 +89,7 @@ namespace DhuwaniSewa.Domain
                     appUsers.IsCompnay = model.IsCompany;
                     appUsers.IsEmployee = model.IsEmployee;
                     appUsers.IsServiceProvider = model.IsServiceProvider;
-
+                    appUsers.Active = true;
                     appUsers.UserId = applicationUser.Id;
 
                     await _userRepository.AddAsync(appUsers);

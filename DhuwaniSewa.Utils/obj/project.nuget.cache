@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kriAEPyShafSYr6Y1pTOPLYocXi6NEXdMm7ts3eAIoFlernEW1huPXJdB1902Sw6AvrRzEOWZikK8Eyn+pLgCQ==",
+  "dgSpecHash": "sT6OsmcKXm2eFvLVG8ISnyvn1FtyxvpvOYUWL5REirVvcHGwv0iiH7pVPODcRh+woQ/23Zt3aDzZw3pk008udQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\DhuwaniSewa\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
+  "projectFilePath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

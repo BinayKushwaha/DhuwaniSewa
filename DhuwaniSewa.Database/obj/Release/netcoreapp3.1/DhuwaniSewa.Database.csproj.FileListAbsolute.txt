@@ -1,0 +1,15 @@
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Database.deps.json
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Database.runtimeconfig.json
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Database.runtimeconfig.dev.json
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Database.dll
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Database.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.csproj.AssemblyReference.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.AssemblyInfoInputs.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.AssemblyInfo.cs
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.csproj.CoreCompileInputs.cache
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.csproj.CopyComplete
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.dll
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Database\obj\Release\netcoreapp3.1\DhuwaniSewa.Database.genruntimeconfig.cache
