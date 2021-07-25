@@ -16,7 +16,7 @@ namespace DhuwaniSewa.Domain
         {
             _fiscalYearRepo = fiscalYearRepo;
         }
-        public async Task<IList<FiscalYearDetailViewModel>> GetAll()
+        public async Task<IList<FiscalYearDetailViewModel>> GetAllAsync()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace DhuwaniSewa.Domain
                 throw;
             }
         }
-        public async Task<string> GetCurrent() {
+        public async Task<string> GetCurrentAsync() {
             try
             {
                 string fiscalYear = string.Empty;

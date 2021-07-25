@@ -15,6 +15,8 @@ using DhuwaniSewa.Model.ViewModel;
 using DhuwaniSewa.Utils.CustomException;
 using DhuwaniSewa.Utils.Helper;
 using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
+using Microsoft.EntityFrameworkCore;
+using DhuwaniSewa.Utils;
 
 namespace DhuwaniSewa.Domain
 {
@@ -25,17 +27,24 @@ namespace DhuwaniSewa.Domain
         private readonly IRepositoryService<RefreshToken, int> _refreshTokeRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly TokenValidationParameters _tokenValidationParameters;
+        private readonly IRepositoryService<ApplicationUsers, int> _userRepo;
+        private readonly IMailService _mailService;
+
         public AuthenticationService(UserManager<ApplicationUsers> userManager,
             IOptions<JwtConfiguration> setting,
             IRepositoryService<RefreshToken, int> refreshTokeRepo,
             IUnitOfWork unitOfWork,
-            TokenValidationParameters tokenValidationParameters)
+            TokenValidationParameters tokenValidationParameters,
+            IRepositoryService<ApplicationUsers, int> userRepo,
+            IMailService mailService)
         {
             this._userManager = userManager;
             this._jwtConfiguration = setting.Value;
             this._refreshTokeRepo = refreshTokeRepo;
             this._unitOfWork = unitOfWork;
             this._tokenValidationParameters = tokenValidationParameters;
+            this._userRepo = userRepo;
+            this._mailService = mailService;
         }
         public async Task<ResponseModel> Login(LoginViewModel request)
         {
@@ -46,27 +55,28 @@ namespace DhuwaniSewa.Domain
                     throw new CustomException("Invalid inputs.");
                 if (!await _userManager.CheckPasswordAsync(user, request.Password))
                     throw new CustomException("Username and password are not correct.");
-                  
+
                 AuthenticationResult result = await CreateJwtTokenAsync(user);
                 if (!result.Succeeded)
-                    throw new Exception("Failed to create token"); 
+                    throw new Exception("Failed to create token");
                 var token = new RefreshTokenViewModel();
                 token.AccessToken = result.Token;
                 token.RefreshToken = result.RefreshToken;
-                return ResponseModel.Success("Logedin successfully.",token);
+                return ResponseModel.Success("Logedin successfully.", token);
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        public async Task<ResponseModel> GetRefreshedToken(RefreshTokenViewModel request)
+        public async Task<ResponseModel> GetRefreshedTokenAsync(RefreshTokenViewModel request)
         {
-            try 
+            try
             {
-                var token = new TokenModel() { 
-                Token=request.AccessToken,
-                RefreshToken=request.RefreshToken
+                var token = new TokenModel()
+                {
+                    Token = request.AccessToken,
+                    RefreshToken = request.RefreshToken
                 };
                 var authResponse = await RefreshToken(token);
                 if (!authResponse.Succeeded)
@@ -78,16 +88,106 @@ namespace DhuwaniSewa.Domain
                 refreshedToken.AccessToken = authResponse.Token;
                 refreshedToken.RefreshToken = authResponse.RefreshToken;
 
-                return ResponseModel.Success("Access token is refreshed successfully.",refreshedToken);
+                return ResponseModel.Success("Access token is refreshed successfully.", refreshedToken);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               return ResponseModel.Error("Failed to refresh access token.");
+                return ResponseModel.Error("Failed to refresh access token.");
+            }
+        }
+        public async Task<bool> GenerateAndSendOtpAsync(OtpViewModel request)
+        {
+            try
+            {
+                bool success = false;
+                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName));
+                if (aspUser == null && aspUser.AppUsers == null)
+                    throw new ArgumentNullException($"User with Id: {request.UserName} does not exit.");
+
+                var otp = OtpGenerator();
+                aspUser.AppUsers.Otp = otp;
+                aspUser.AppUsers.OtpCreatedDate = DateTime.Now;
+                _userRepo.Update(aspUser);
+                await _unitOfWork.CommitAsync();
+
+                if (CustomValidator.IsEmail(request.UserName))
+                {
+                    var mailMesage = new MailViewModel();
+                    mailMesage.To.Add(request.UserName);
+                    mailMesage.Subject = request.MailSubject;
+                    mailMesage.Body = string.Format(request.MailBody, otp);
+                    await _mailService.SendMailAsync(mailMesage);
+                    success = true;
+                }
+                ///TODO: Implement mobile service for otp
+                return success;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public async Task<bool> VerifyOtpAsync(OtpViewModel request)
+        {
+            try
+            {
+                bool validOtp = false;
+                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => a.UserName == request.UserName);
+                if (aspUser == null && aspUser.AppUsers == null)
+                    throw new CustomException($"{request.UserName} does not exist.");
+                double timeElapsed = DateTime.Now.Subtract(aspUser.AppUsers.OtpCreatedDate).TotalMinutes;
+                if (string.Equals(aspUser.AppUsers.Otp, request.Otp) && timeElapsed < 10)
+                    validOtp = true;
+                return validOtp;
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
-        
+        public async Task<bool> VerifyAccountAsync(OtpViewModel request)
+        {
+            try
+            {
+                bool verified = false;
+                var otpVerified = await VerifyOtpAsync(request);
+                if (!otpVerified)
+                    throw new CustomException("Your otp is expired. Please try another.");
+                var aspUser = await _userRepo.GetAync(a => a.UserName==request.UserName);
+                if (CustomValidator.IsEmail(request.UserName))
+                {
+                    aspUser.EmailConfirmed = true;
+                    verified = true;
+                }
+                else if (CustomValidator.IsMobileNumber(request.UserName))
+                {
+                    aspUser.PhoneNumberConfirmed = true;
+                    verified = true;
+                }
+                _userRepo.Update(aspUser);
+                await _unitOfWork.CommitAsync();
+                return verified;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         #region Helper Methods
+
+        private string OtpGenerator()
+        {
+            StringBuilder otp = new StringBuilder();
+            string[] allowedChars = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+            Random random = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                int number = random.Next(0, allowedChars.Length);
+                otp.Append(allowedChars[number]);
+            }
+            return otp.ToString();
+        }
         private async Task<AuthenticationResult> AddUpdateRefreshToken(RefreshToken refreshToken)
         {
             try
@@ -103,7 +203,7 @@ namespace DhuwaniSewa.Domain
                     Succeeded = true
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -162,7 +262,6 @@ namespace DhuwaniSewa.Domain
         private ClaimsPrincipal GetPrincipalFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-
             try
             {
                 var tokenValidationParameters = _tokenValidationParameters.Clone();
@@ -172,7 +271,6 @@ namespace DhuwaniSewa.Domain
                 {
                     return null;
                 }
-
                 return principal;
             }
             catch
@@ -227,7 +325,7 @@ namespace DhuwaniSewa.Domain
                     CreationDate = DateTime.UtcNow,
                     ExpiryDate = DateTime.UtcNow.AddMonths(6)
                 };
-                var result=await AddUpdateRefreshToken(refreshToken);
+                var result = await AddUpdateRefreshToken(refreshToken);
                 authenticationResult.RefreshToken = result.RefreshToken;
                 authenticationResult.Succeeded = true;
                 return authenticationResult;

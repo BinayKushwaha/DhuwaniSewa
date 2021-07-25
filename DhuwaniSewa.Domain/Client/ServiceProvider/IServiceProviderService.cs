@@ -8,7 +8,7 @@ namespace DhuwaniSewa.Domain
 {
     public interface IServiceProviderService
     {
-        Task<int> Save(ServiceProviderViewModel reuest);
+        Task<int> SaveAsync(ServiceProviderViewModel reuest);
         void Update(ServiceProviderViewModel request);
         IList<ServiceProviderViewModel> GetAll();
         Task<ServiceProviderViewModel> Get(int Id);

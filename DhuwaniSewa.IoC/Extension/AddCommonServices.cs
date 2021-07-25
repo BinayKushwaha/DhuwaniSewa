@@ -11,7 +11,7 @@ namespace DhuwaniSewa.IoC
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-           
+            services.AddTransient<IMailService, MailService>();
         }
     }
 }

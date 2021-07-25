@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using DhuwaniSewa.Database.Repository;
+﻿using DhuwaniSewa.Database.Repository;
 using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

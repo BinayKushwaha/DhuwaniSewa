@@ -75,8 +75,8 @@ namespace DhuwaniSewa.Domain
                 destination.DetailsCorrectAgreed = source.DetailsCorrectAggreed;
                 if (source.ServiceProviderId == 0)
                 {
-                    int sn = _serialNumberSevice.Get(SerialNumber.ServiceProvider).Result;
-                    string fs = _fiscalYearService.GetCurrent().Result;
+                    int sn = _serialNumberSevice.GetAsync(SerialNumber.ServiceProvider).Result;
+                    string fs = _fiscalYearService.GetCurrentAsync().Result;
                     destination.DhuwaniSewaId = string.Format(DhuwaniSewaIdFormat.ServiceProviderIdFormat, fs, sn);
                 }
                 return destination;

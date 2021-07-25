@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DhuwaniSewa.Model.DbEntities;
+﻿using DhuwaniSewa.Model.DbEntities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

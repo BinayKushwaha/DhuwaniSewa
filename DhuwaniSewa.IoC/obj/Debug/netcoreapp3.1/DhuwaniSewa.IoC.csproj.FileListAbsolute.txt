@@ -47,8 +47,6 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.IoC\obj\Debug\netcoreapp3
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.genruntimeconfig.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.IoC.deps.json
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.IoC.runtimeconfig.json
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.IoC.runtimeconfig.dev.json
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.IoC.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.IoC.pdb
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\bin\Debug\netcoreapp3.1\DhuwaniSewa.Database.dll
@@ -66,4 +64,3 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\Dhuwa
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.csproj.CopyComplete
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.pdb
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.IoC\obj\Debug\netcoreapp3.1\DhuwaniSewa.IoC.genruntimeconfig.cache

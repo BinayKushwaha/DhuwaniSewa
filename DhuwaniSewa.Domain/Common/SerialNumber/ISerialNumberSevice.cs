@@ -8,6 +8,6 @@ namespace DhuwaniSewa.Domain
 {
     public interface ISerialNumberSevice
     {
-        Task<int> Get(SerialNumber type);
+        Task<int> GetAsync(SerialNumber type);
     }
 }

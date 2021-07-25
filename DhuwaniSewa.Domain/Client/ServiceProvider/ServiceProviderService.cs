@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DhuwaniSewa.Database.Repository;
+﻿using DhuwaniSewa.Database.Repository;
 using DhuwaniSewa.Model.Constant;
 using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.Enum;
@@ -27,7 +26,6 @@ namespace DhuwaniSewa.Domain
         private readonly IRepositoryService<ServiceProviderContactPerson, int> _serviceProviderContactPersonRepo;
         private readonly IRepositoryService<PersonalDetail, int> _persondetailRepo;
         private readonly IRepositoryService<ContactDetail, int> _contactDetailRepo;
-        private readonly IUserService _userService;
         private readonly IRepositoryService<DocumentDetail, int> _documentRepo;
         public ServiceProviderService(
             IPersonDetailService personDetailService,
@@ -42,7 +40,6 @@ namespace DhuwaniSewa.Domain
             IRepositoryService<ServiceProviderContactPerson, int> serviceProviderContactPersonRepo,
             IRepositoryService<PersonalDetail, int> persondetailRepo,
             IRepositoryService<ContactDetail, int> contactDetailRepo,
-            IUserService userService,
             IRepositoryService<DocumentDetail, int> documentRepo
             )
         {
@@ -58,26 +55,20 @@ namespace DhuwaniSewa.Domain
             this._persondetailRepo = persondetailRepo;
             this._contactDetailRepo = contactDetailRepo;
             this._serviceProviderContactPersonRepo = serviceProviderContactPersonRepo;
-            this._userService = userService;
         }
-        public async Task<int> Save(ServiceProviderViewModel request)
+        public async Task<int> SaveAsync(ServiceProviderViewModel request)
         {
-            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            try
             {
-                try
-                {
-                    var serviceProvider = _mapper.MapToEntity(request);
-                    await _serviceProviderRepo.AddAsync(serviceProvider);
-                    await _unitOfWork.CommitAsync();
+                var serviceProvider = _mapper.MapToEntity(request);
+                await _serviceProviderRepo.AddAsync(serviceProvider);
+                await _unitOfWork.CommitAsync();
 
-                    await transaction.CommitAsync();
-                    return serviceProvider.Id;
-                }
-                catch (Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
+                return serviceProvider.Id;
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
         public IList<ServiceProviderViewModel> GetAll()
@@ -121,7 +112,7 @@ namespace DhuwaniSewa.Domain
                     else
                     {
                         var personId = serviceProvider.AppUser.PersonalDetail.FirstOrDefault().PersonId;
-                        var personDetail = personDetails.FirstOrDefault(a=>a.Id==personId);
+                        var personDetail = personDetails.FirstOrDefault(a => a.Id == personId);
                         var contactDetails = personContacts.Where(a => a.PersonalDetailId == personId).
                             Select(a => a.ContactDetail).ToList();
                         var documentDetails = personDocuments.Where(a => a.PersonDetailId == personId).
@@ -247,7 +238,7 @@ namespace DhuwaniSewa.Domain
 
                     personDetail.FirstName = request.FirstName;
                     personDetail.LastName = request.LastName;
-                    foreach(var contact in request.ContactDetails)
+                    foreach (var contact in request.ContactDetails)
                     {
                         personDetail.PersonalDetailContactDetails.Add(new PersonalDetailContactDetail()
                         {
@@ -273,8 +264,9 @@ namespace DhuwaniSewa.Domain
                     personId = personDetail.Id;
 
                     contactPerson.ServiceProviderId = request.ServiceProviderId;
-                    contactPerson.ContactPerson=new ContactPerson() { 
-                        PersonId=personId
+                    contactPerson.ContactPerson = new ContactPerson()
+                    {
+                        PersonId = personId
                     };
                     await _serviceProviderContactPersonRepo.AddAsync(contactPerson);
                     await _unitOfWork.CommitAsync();
@@ -292,21 +284,21 @@ namespace DhuwaniSewa.Domain
         }
         public async Task<ServiceProviderContactPersonViewModel> UpdateContactPerson(ServiceProviderContactPersonViewModel request)
         {
-            using (var transaction=await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
             {
                 try
                 {
-                    var contactPerson =await _serviceProviderContactPersonRepo.GetQueryable().Include(a=>a.ContactPerson).FirstOrDefaultAsync(a => a.ServiceProviderId == request.ServiceProviderId 
-                    && a.ContactPersonId == request.ContactPersonId && a.ContactPerson.Active);
+                    var contactPerson = await _serviceProviderContactPersonRepo.GetQueryable().Include(a => a.ContactPerson).FirstOrDefaultAsync(a => a.ServiceProviderId == request.ServiceProviderId
+                       && a.ContactPersonId == request.ContactPersonId && a.ContactPerson.Active);
                     if (contactPerson == null)
                         throw new ArgumentNullException($"Contact person with ServiceProviderId: {request.ServiceProviderId} and contact personId: {request.ContactPersonId}");
-                    var personDetail =await _persondetailRepo.GetQueryable().Include(a => a.PersonalDetailContactDetails)
-                        .Include(a => a.PersonalDetailDocumentDetails).FirstOrDefaultAsync(a=>a.Id==contactPerson.ContactPersonId);
+                    var personDetail = await _persondetailRepo.GetQueryable().Include(a => a.PersonalDetailContactDetails)
+                        .Include(a => a.PersonalDetailDocumentDetails).FirstOrDefaultAsync(a => a.Id == contactPerson.ContactPersonId);
 
                     personDetail.FirstName = request.FirstName;
                     personDetail.LastName = request.LastName;
-                    var contactDetails=personDetail.PersonalDetailContactDetails;
-                    foreach(var contact in request.ContactDetails)
+                    var contactDetails = personDetail.PersonalDetailContactDetails;
+                    foreach (var contact in request.ContactDetails)
                     {
                         var updateContact = contactDetails.FirstOrDefault(a => a.ContactDetailId == contact.ContactDetailId).ContactDetail;
                         if (updateContact == null)
@@ -316,7 +308,7 @@ namespace DhuwaniSewa.Domain
                         _contactDetailRepo.Update(updateContact);
                     }
 
-                    var citizenshipDoc = personDetail.PersonalDetailDocumentDetails.FirstOrDefault(a=>a.DocumentDetail.Type==nameof(DocumentType.Ctitzenship)).DocumentDetail;
+                    var citizenshipDoc = personDetail.PersonalDetailDocumentDetails.FirstOrDefault(a => a.DocumentDetail.Type == nameof(DocumentType.Ctitzenship)).DocumentDetail;
                     citizenshipDoc.RegistrationNumber = request.CitizenshipNumber;
                     citizenshipDoc.IssuedDistrict = request.CitizenshipIssuedDistrict;
                     _documentRepo.Update(citizenshipDoc);

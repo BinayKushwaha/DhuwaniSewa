@@ -8,9 +8,9 @@ namespace DhuwaniSewa.Domain
 {
     public interface IFiscalYearService
     {
-        Task<IList<FiscalYearDetailViewModel>> GetAll();
+        Task<IList<FiscalYearDetailViewModel>> GetAllAsync();
 
         // TO DO: Implement fiscal year list in cache and get curren fiscal year 
-        Task<string> GetCurrent();
+        Task<string> GetCurrentAsync();
     }
 }

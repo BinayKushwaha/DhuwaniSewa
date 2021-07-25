@@ -8,7 +8,7 @@ namespace DhuwaniSewa.Domain
 {
     public interface IUserService
     {
-        Task<RegisterUserViewModel> Register(RegisterUserViewModel model);
-        Task<UserPersonViewModel> SaveUserPerson(UserPersonViewModel request);
+        Task<RegistrationResponseModel> RegisterAsync(RegisterUserViewModel model);
+        Task<UserPersonViewModel> SaveUserPersonAsync(UserPersonViewModel request);
     }
 }

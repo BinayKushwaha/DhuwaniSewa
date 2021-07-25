@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using DhuwaniSewa.Model.ViewModel;
 using DhuwaniSewa.Utils.CustomException;
 using DhuwaniSewa.Domain;
+using DhuwaniSewa.Model.Constant;
 
 namespace DhuwaniSewa.Web.Api.Controller.Account
 {
@@ -20,7 +21,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         private readonly IUserService _userService;
         private readonly IAuthenticationService _authenticationService;
         public AccountController(IUserService userService,
-            IAuthenticationService authenticationService) 
+            IAuthenticationService authenticationService)
         {
             this._userService = userService;
             this._authenticationService = authenticationService;
@@ -29,20 +30,20 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
-        public async Task<IActionResult> Register(RegisterUserViewModel request)
+        public async Task<IActionResult> RegisterAsync(RegisterUserViewModel request)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-               var result= await _userService.Register(request);
-                return Ok(ResponseModel.Success("User registered successfully.",result));
+                var result = await _userService.RegisterAsync(request);
+                return Ok(ResponseModel.Success("User registered successfully.", result));
             }
-            catch(CustomException ex)
+            catch (CustomException ex)
             {
                 return StatusCode(StatusCodes.Status501NotImplemented, ResponseModel.Info(ex.Message, request));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administartor."));
             }
@@ -58,9 +59,9 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs");
                 var result = await _authenticationService.Login(request);
-                return Ok(ResponseModel.Success("Login successfull.",result));
+                return Ok(result);
             }
-            catch(CustomException ex)
+            catch (CustomException ex)
             {
                 return Ok(ResponseModel.Info(ex.Message));
             }
@@ -71,16 +72,66 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         }
         [HttpPost]
         [Route("refreshtoken")]
-        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenViewModel request)
+        public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenViewModel request)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-                var result =await _authenticationService.GetRefreshedToken(request);
-                return Ok(ResponseModel.Success("Tokens are refreshed successfully.", result));
+                var result = await _authenticationService.GetRefreshedTokenAsync(request);
+                return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("createotp")]
+        public async Task<IActionResult> CreateSendRegistrationOtpAsync(OtpViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                request.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
+                request.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
+                var result = await _authenticationService.GenerateAndSendOtpAsync(request);
+                if (result)
+                    return Ok(ResponseModel.Success("Otp is send to your username."));
+                else
+                    return Ok(ResponseModel.Info("Failed to create otp."));
+            }
+            catch (CustomException ex)
+            {
+                return Ok(ResponseModel.Info(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("verifyaccount")]
+        public async Task<IActionResult> VerifyAccountAsync(OtpViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                var result = await _authenticationService.VerifyAccountAsync(request);
+                if (result)
+                    return Ok(ResponseModel.Success("Account verified succesflly."));
+                else
+                    return Ok(ResponseModel.Info("Your otp is expired."));
+            }
+            catch (CustomException ex)
+            {
+                return Ok(ResponseModel.Info(ex.Message));
+            }
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
             }

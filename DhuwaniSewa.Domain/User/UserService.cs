@@ -1,14 +1,13 @@
-﻿using AutoMapper;
-using DhuwaniSewa.Database.Repository;
+﻿using DhuwaniSewa.Database.Repository;
+using DhuwaniSewa.Model.Constant;
 using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.Enum;
 using DhuwaniSewa.Model.ViewModel;
+using DhuwaniSewa.Utils;
 using DhuwaniSewa.Utils.CustomException;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DhuwaniSewa.Domain
@@ -20,11 +19,16 @@ namespace DhuwaniSewa.Domain
         private readonly IPersonDetailService _personDetailService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepositoryService<UserPersonDetail, int> _userPersonRepo;
+        private readonly IServiceProviderService _serviceProviderService;
+        private readonly IAuthenticationService _authenticationService;
+
         public UserService(IRepositoryService<AppUsers, int> userRepository,
             IUnitOfWork unitOfWork,
             UserManager<ApplicationUsers> userManager,
             IPersonDetailService personDetailService,
-            IRepositoryService<UserPersonDetail, int> userPersonRepo
+            IRepositoryService<UserPersonDetail, int> userPersonRepo,
+            IServiceProviderService serviceProviderService,
+            IAuthenticationService authenticationService
             )
         {
             this._userRepository = userRepository;
@@ -32,21 +36,25 @@ namespace DhuwaniSewa.Domain
             this._userManager = userManager;
             this._personDetailService = personDetailService;
             this._userPersonRepo = userPersonRepo;
+            this._serviceProviderService = serviceProviderService;
+            this._authenticationService = authenticationService;
         }
-        public async Task<RegisterUserViewModel> Register(RegisterUserViewModel model)
+        public async Task<RegistrationResponseModel> RegisterAsync(RegisterUserViewModel model)
         {
             using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
             {
                 try
                 {
                     ApplicationUsers applicationUser = new ApplicationUsers();
+                    int personId = 0;
+                    int serviceProviderId = 0;
 
                     if (string.IsNullOrWhiteSpace(model.UserName) || string.IsNullOrEmpty(model.UserName))
                         throw new CustomException("Invalid username. Please try again.");
 
-                    if (IsEmail(model.UserName))
+                    if (CustomValidator.IsEmail(model.UserName))
                         model.Email = model.UserName;
-                    else if (IsMobileNumber(model.UserName))
+                    else if (CustomValidator.IsMobileNumber(model.UserName))
                         model.MobileNumber = model.UserName;
                     else
                         throw new CustomException("Invalid username. Please try again.");
@@ -77,7 +85,6 @@ namespace DhuwaniSewa.Domain
                             var errors = newAddedUser.Errors;
                             if (errors.Any(a => a.Code == "PasswordRequiresLower"))
                                 throw new CustomException("Passwords must have at least one lowercase ('a'-'z').");
-
                         }
 
                     }
@@ -104,18 +111,40 @@ namespace DhuwaniSewa.Domain
                         Number = model.MobileNumber,
                         Email = model.Email
                     });
-                    var personId= await _personDetailService.Save(personModel);
-                    
+                    personId = await _personDetailService.Save(personModel);
+
                     var userPersonModel = new UserPersonViewModel()
                     {
                         UserId = appUsers.Id,
                         PersonId = personId
                     };
-                    await SaveUserPerson(userPersonModel);
+                    await SaveUserPersonAsync(userPersonModel);
 
-                    model.Id = appUsers.Id;
+                    /// Create Serviceprovider or Service Seeker
+                    if (model.IsServiceProvider && !model.IsEmployee)
+                    {
+                        var serviceProviderModel = new ServiceProviderViewModel();
+                        serviceProviderModel.Active = true;
+                        serviceProviderModel.IsCompany = model.IsCompany;
+                        serviceProviderModel.UserId = appUsers.Id;
+                        serviceProviderId = await _serviceProviderService.SaveAsync(serviceProviderModel);
+                    }
+
+                    ///Generate Otp and send for verification
+                    var otpRequestModel = new OtpViewModel();
+                    otpRequestModel.UserName = model.UserName;
+                    otpRequestModel.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
+                    otpRequestModel.MailBody =MessageTemplate.Registration_OTP_Mail_Body;
+                    await _authenticationService.GenerateAndSendOtpAsync(otpRequestModel);
+
                     await transaction.CommitAsync();
-                    return model;
+
+                    return new RegistrationResponseModel()
+                    {
+                        UserId = appUsers.Id,
+                        ServiceProviderId = serviceProviderId,
+                        ServiceSeekerId = serviceProviderId,
+                    };
                 }
                 catch (Exception ex)
                 {
@@ -124,7 +153,7 @@ namespace DhuwaniSewa.Domain
                 }
             }
         }
-        public async Task<UserPersonViewModel> SaveUserPerson(UserPersonViewModel request)
+        public async Task<UserPersonViewModel> SaveUserPersonAsync(UserPersonViewModel request)
         {
             var userPerson = new UserPersonDetail();
             userPerson.UserId = request.UserId;
@@ -133,18 +162,5 @@ namespace DhuwaniSewa.Domain
             await _unitOfWork.CommitAsync();
             return request;
         }
-        #region Helper
-        private bool IsEmail(string email)
-        {
-            return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-        }
-        private bool IsMobileNumber(string mobileNumber)
-        {
-            Regex reg = new Regex(@"^[0-9]{10}$");
-            return reg.IsMatch(mobileNumber);
-        }
-        #endregion
     }
 }

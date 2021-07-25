@@ -9,6 +9,9 @@ namespace DhuwaniSewa.Domain
     public interface IAuthenticationService
     {
         Task<ResponseModel> Login(LoginViewModel request);
-        Task<ResponseModel> GetRefreshedToken(RefreshTokenViewModel request);
+        Task<ResponseModel> GetRefreshedTokenAsync(RefreshTokenViewModel request);
+        Task<bool> GenerateAndSendOtpAsync(OtpViewModel reuest);
+        Task<bool> VerifyOtpAsync(OtpViewModel request);
+        Task<bool> VerifyAccountAsync(OtpViewModel request);
     }
 }

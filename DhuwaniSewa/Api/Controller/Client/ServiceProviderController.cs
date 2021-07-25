@@ -30,7 +30,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid Inputs");
-                int Id = await _serviceProviderService.Save(request);
+                int Id = await _serviceProviderService.SaveAsync(request);
                 return Ok(ResponseModel.Success("Service Provider details save succesfully.", new { Id = Id }));
             }
             catch(Exception ex)

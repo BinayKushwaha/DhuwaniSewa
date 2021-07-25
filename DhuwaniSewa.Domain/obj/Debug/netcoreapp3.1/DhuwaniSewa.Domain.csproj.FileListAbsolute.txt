@@ -41,8 +41,6 @@ D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Domain\obj\Debug\netcorea
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.pdb
 D:\Project\Startup\DhuwaniSewa\DhuwaniSewa\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.genruntimeconfig.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.deps.json
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.runtimeconfig.json
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.runtimeconfig.dev.json
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Domain.pdb
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\bin\Debug\netcoreapp3.1\DhuwaniSewa.Database.dll
@@ -58,4 +56,3 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\Dh
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.csproj.CopyComplete
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.pdb
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Domain\obj\Debug\netcoreapp3.1\DhuwaniSewa.Domain.genruntimeconfig.cache

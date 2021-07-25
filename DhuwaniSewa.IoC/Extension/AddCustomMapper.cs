@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DhuwaniSewa.Domain;
+﻿using DhuwaniSewa.Domain;
 using DhuwaniSewa.Model.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -5,7 +5,7 @@ using DhuwaniSewa.Model.DbEntities;
 
 namespace DhuwaniSewa.Model.DbEntities
 {
-    public class AppUsers:RecordHistory
+    public class AppUsers : RecordHistory
     {
         public AppUsers()
         {
@@ -21,6 +21,8 @@ namespace DhuwaniSewa.Model.DbEntities
         public bool IsEmployee { get; set; }
         public bool IsCompnay { get; set; }
         public bool IsServiceProvider { get; set; }
+        public string Otp { get; set; }
+        public DateTime OtpCreatedDate { get; set; }
 
         public virtual ApplicationUsers Users { get; set; }
         public virtual Customer Customer { get; set; }

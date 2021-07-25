@@ -3,7 +3,6 @@ using DhuwaniSewa.Model.DbEntities;
 using DhuwaniSewa.Model.Enum;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +18,7 @@ namespace DhuwaniSewa.Domain
             this._serailNumberRepo = serailNumberRepo;
             this._unitOfWork = unitOfWork;
         }
-        public async Task<int> Get(SerialNumber type)
+        public async Task<int> GetAsync(SerialNumber type)
         {
             try
             {
