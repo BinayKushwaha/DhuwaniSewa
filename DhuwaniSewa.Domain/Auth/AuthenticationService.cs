@@ -55,6 +55,8 @@ namespace DhuwaniSewa.Domain
                     throw new CustomException("Invalid inputs.");
                 if (!await _userManager.CheckPasswordAsync(user, request.Password))
                     throw new CustomException("Username and password are not correct.");
+                if (!user.EmailConfirmed && !user.PhoneNumberConfirmed)
+                    throw new CustomException("Account not verified. Please verify.");
 
                 AuthenticationResult result = await CreateJwtTokenAsync(user);
                 if (!result.Succeeded)

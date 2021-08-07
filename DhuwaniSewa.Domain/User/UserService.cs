@@ -90,7 +90,7 @@ namespace DhuwaniSewa.Domain
                     }
 
                     if (await _userRepository.GetAync(a => a.UserId == applicationUser.Id) != null)
-                        throw new CustomException($"{model.UserName} as username already exist.");
+                        throw new CustomException("User already exist.");
 
                     AppUsers appUsers = new AppUsers();
                     appUsers.IsCompnay = model.IsCompany;

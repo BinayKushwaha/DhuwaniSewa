@@ -30,3 +30,4 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\Dhu
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Debug\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache
