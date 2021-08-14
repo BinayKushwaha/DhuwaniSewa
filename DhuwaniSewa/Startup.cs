@@ -53,7 +53,7 @@ namespace DhuwaniSewa
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello! I am DhuwaniSewa.");
+                    await context.Response.WriteAsync("Hello! I am DhuwaniSewa. Published: V.1.2");
                 });
                 endpoints.MapControllerRoute(
                     name: "default",

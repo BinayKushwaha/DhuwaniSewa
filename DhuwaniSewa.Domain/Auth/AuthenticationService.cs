@@ -97,31 +97,16 @@ namespace DhuwaniSewa.Domain
                 return ResponseModel.Error("Failed to refresh access token.");
             }
         }
-        public async Task<bool> GenerateAndSendOtpAsync(OtpViewModel request)
+        public async Task<bool> GenerateSendRegistrationOtpAsync(OtpViewModel request)
         {
             try
             {
                 bool success = false;
-                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName));
+                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName) && a.IsActive);
                 if (aspUser == null && aspUser.AppUsers == null)
-                    throw new ArgumentNullException($"User with Id: {request.UserName} does not exit.");
+                    throw new CustomException($"User does not exit.");
 
-                var otp = OtpGenerator();
-                aspUser.AppUsers.Otp = otp;
-                aspUser.AppUsers.OtpCreatedDate = DateTime.Now;
-                _userRepo.Update(aspUser);
-                await _unitOfWork.CommitAsync();
-
-                if (CustomValidator.IsEmail(request.UserName))
-                {
-                    var mailMesage = new MailViewModel();
-                    mailMesage.To.Add(request.UserName);
-                    mailMesage.Subject = request.MailSubject;
-                    mailMesage.Body = string.Format(request.MailBody, otp);
-                    await _mailService.SendMailAsync(mailMesage);
-                    success = true;
-                }
-                ///TODO: Implement mobile service for otp
+                success = await GenerateSendOtpAsync(aspUser, request);
                 return success;
             }
             catch (Exception ex)
@@ -129,7 +114,135 @@ namespace DhuwaniSewa.Domain
                 throw;
             }
         }
-        public async Task<bool> VerifyOtpAsync(OtpViewModel request)
+        public async Task<bool> GenerateSendPasswordResetOtpAsync(OtpViewModel request)
+        {
+            try
+            {
+                bool success = false;
+                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName) && a.IsActive);
+                if (aspUser == null && aspUser.AppUsers == null)
+                    throw new CustomException($"User does not exit.");
+                if (!aspUser.EmailConfirmed && !aspUser.PhoneNumberConfirmed)
+                    return success;
+                if (!request.EmalMobileNumber.Equals(aspUser.Email, StringComparison.OrdinalIgnoreCase) && !request.EmalMobileNumber.Equals(aspUser.PhoneNumber, StringComparison.OrdinalIgnoreCase))
+                    return success;
+
+                success = await GenerateSendOtpAsync(aspUser, request);
+                return success;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        private async Task<bool> GenerateSendOtpAsync(ApplicationUsers user, OtpViewModel request)
+        {
+            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    var otp = OtpGenerator();
+                    user.AppUsers.Otp = otp;
+                    user.AppUsers.OtpCreatedDate = DateTime.Now;
+                    user.AppUsers.IsFreshOtp = true;
+                    _userRepo.Update(user);
+                    await _unitOfWork.CommitAsync();
+
+                    if (CustomValidator.IsEmail(request.EmalMobileNumber.Trim()))
+                    {
+                        var mailMesage = new MailViewModel();
+                        mailMesage.To.Add(request.UserName);
+                        mailMesage.Subject = request.MailSubject;
+                        mailMesage.Body = string.Format(request.MailBody, otp);
+                        await _mailService.SendMailAsync(mailMesage);
+                    }
+
+                    ///TODO: Implement mobile service for otp
+
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
+
+        public async Task<bool> VerifyAccountAsync(OtpViewModel request)
+        {
+            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    bool verified = false;
+                    var otpVerified = await VerifyOtpAsync(request);
+                    if (!otpVerified)
+                        throw new CustomException("Your otp is expired. Please try another.");
+                    var aspUser = await _userRepo.GetAync(a => a.UserName == request.UserName);
+                    if (CustomValidator.IsEmail(request.UserName))
+                    {
+                        aspUser.EmailConfirmed = true;
+                        verified = true;
+                    }
+                    else if (CustomValidator.IsMobileNumber(request.UserName))
+                    {
+                        aspUser.PhoneNumberConfirmed = true;
+                        verified = true;
+                    }
+                    _userRepo.Update(aspUser);
+
+                    await _unitOfWork.CommitAsync();
+                    await transaction.CommitAsync();
+                    return verified;
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
+
+        public async Task<bool> VerifyOtpResetPassword(PasswordResetViewModel request)
+        {
+            using (var tranaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    bool succeeded = false;
+                    request.UserName = request.UserName.Trim();
+                    OtpViewModel param = new OtpViewModel()
+                    {
+                        UserName = request.UserName,
+                        Otp = request.Otp
+                    };
+
+                    var otpVerified = await VerifyOtpAsync(param);
+                    if (!otpVerified)
+                        throw new CustomException("Your otp is expired. Please try another.");
+
+                    var user = await _userManager.FindByNameAsync(request.UserName);
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user,request.Password);
+                    var result = await _userManager.UpdateAsync(user);
+                    if (!result.Succeeded)
+                        throw new Exception("Failed to reset password.");
+
+                    await tranaction.CommitAsync();
+                    succeeded = result.Succeeded;
+                    return succeeded;
+                }
+                catch (Exception ex)
+                {
+                    await tranaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
+
+        #region Helper Methods
+        private async Task<bool> VerifyOtpAsync(OtpViewModel request)
         {
             try
             {
@@ -138,8 +251,13 @@ namespace DhuwaniSewa.Domain
                 if (aspUser == null && aspUser.AppUsers == null)
                     throw new CustomException($"{request.UserName} does not exist.");
                 double timeElapsed = DateTime.Now.Subtract(aspUser.AppUsers.OtpCreatedDate).TotalMinutes;
-                if (string.Equals(aspUser.AppUsers.Otp, request.Otp) && timeElapsed < 10)
+                if (string.Equals(aspUser.AppUsers.Otp, request.Otp) && timeElapsed < 10 && aspUser.AppUsers.IsFreshOtp)
+                {
                     validOtp = true;
+                    aspUser.AppUsers.IsFreshOtp = false;
+                    _userRepo.Update(aspUser);
+                    await _unitOfWork.CommitAsync();
+                }
                 return validOtp;
             }
             catch (Exception ex)
@@ -147,37 +265,6 @@ namespace DhuwaniSewa.Domain
                 throw;
             }
         }
-
-        public async Task<bool> VerifyAccountAsync(OtpViewModel request)
-        {
-            try
-            {
-                bool verified = false;
-                var otpVerified = await VerifyOtpAsync(request);
-                if (!otpVerified)
-                    throw new CustomException("Your otp is expired. Please try another.");
-                var aspUser = await _userRepo.GetAync(a => a.UserName==request.UserName);
-                if (CustomValidator.IsEmail(request.UserName))
-                {
-                    aspUser.EmailConfirmed = true;
-                    verified = true;
-                }
-                else if (CustomValidator.IsMobileNumber(request.UserName))
-                {
-                    aspUser.PhoneNumberConfirmed = true;
-                    verified = true;
-                }
-                _userRepo.Update(aspUser);
-                await _unitOfWork.CommitAsync();
-                return verified;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        #region Helper Methods
-
         private string OtpGenerator()
         {
             StringBuilder otp = new StringBuilder();
@@ -302,7 +389,6 @@ namespace DhuwaniSewa.Domain
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim("UserId", user.Id),
                 }
                 .Union(roleClaims));

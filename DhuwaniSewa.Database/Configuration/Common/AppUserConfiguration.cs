@@ -18,7 +18,7 @@ namespace DhuwaniSewa.Database.Configuration
             builder.Property(a => a.IsEmployee).IsRequired().HasDefaultValue(false);
             builder.Property(a => a.Active).IsRequired().HasDefaultValue(true);
             builder.Property(a => a.IsServiceProvider).IsRequired().HasDefaultValue(true);
-
+            builder.Property(a => a.IsFreshOtp).IsRequired();
             builder.Property(a => a.Otp).HasMaxLength(250);
 
             builder.HasOne(a => a.Users).WithOne(b => b.AppUsers).

@@ -2,6 +2,7 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\bin\Debug\net5.0\DhuwaniSew
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\bin\Debug\net5.0\DhuwaniSewa.Utils.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\bin\Debug\net5.0\ref\DhuwaniSewa.Utils.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\bin\Debug\net5.0\DhuwaniSewa.Utils.pdb
+D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.csproj.AssemblyReference.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.GeneratedMSBuildEditorConfig.editorconfig
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.AssemblyInfoInputs.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.AssemblyInfo.cs
@@ -9,4 +10,3 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSew
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\ref\DhuwaniSewa.Utils.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.pdb
-D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Utils\obj\Debug\net5.0\DhuwaniSewa.Utils.csproj.AssemblyReference.cache

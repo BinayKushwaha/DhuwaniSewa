@@ -47,6 +47,9 @@ namespace DhuwaniSewa.Database.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<bool>("IsFreshOtp")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsServiceProvider")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")

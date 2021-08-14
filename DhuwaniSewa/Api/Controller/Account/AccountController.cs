@@ -70,6 +70,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
             }
         }
+
         [HttpPost]
         [Route("refreshtoken")]
         public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenViewModel request)
@@ -86,9 +87,10 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
             }
         }
+
         [HttpPost]
         [AllowAnonymous]
-        [Route("createotp")]
+        [Route("registrationcreateotp")]
         public async Task<IActionResult> CreateSendRegistrationOtpAsync(OtpViewModel request)
         {
             try
@@ -97,7 +99,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                     return BadRequest("Invalid inputs.");
                 request.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
                 request.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
-                var result = await _authenticationService.GenerateAndSendOtpAsync(request);
+                var result = await _authenticationService.GenerateSendRegistrationOtpAsync(request);
                 if (result)
                     return Ok(ResponseModel.Success("Otp is send to your username."));
                 else
@@ -112,6 +114,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
             }
         }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("verifyaccount")]
@@ -124,6 +127,58 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 var result = await _authenticationService.VerifyAccountAsync(request);
                 if (result)
                     return Ok(ResponseModel.Success("Account verified succesflly."));
+                else
+                    return Ok(ResponseModel.Info("Your otp is expired."));
+            }
+            catch (CustomException ex)
+            {
+                return Ok(ResponseModel.Info(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("resetpasswordcreateotp")]
+        public async Task<IActionResult>CreateSendResetPasswordOtpAsync(OtpViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                request.MailSubject = MessageTemplate.Password_Reset_OTP_Mail_Subject;
+                request.MailBody = MessageTemplate.Password_Reset_OTP_Mail_Body;
+                var result = await _authenticationService.GenerateSendPasswordResetOtpAsync(request);
+                if (result)
+                    return Ok(ResponseModel.Success("Otp is send to your username."));
+                else
+                    return Ok(ResponseModel.Info("Failed to create otp."));
+            }
+            catch (CustomException ex)
+            {
+                return Ok(ResponseModel.Info(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ResponseModel.Error("Something went wrong. Please contact administrator"));
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("verifyotpresetpassword")]
+        public async Task<IActionResult> VerifyOtpResetPassword(PasswordResetViewModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid inputs.");
+                var result = await _authenticationService.VerifyOtpResetPassword(request);
+                if (result)
+                    return Ok(ResponseModel.Success("Password changed successfully."));
                 else
                     return Ok(ResponseModel.Info("Your otp is expired."));
             }

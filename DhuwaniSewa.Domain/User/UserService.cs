@@ -135,7 +135,7 @@ namespace DhuwaniSewa.Domain
                     otpRequestModel.UserName = model.UserName;
                     otpRequestModel.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
                     otpRequestModel.MailBody =MessageTemplate.Registration_OTP_Mail_Body;
-                    await _authenticationService.GenerateAndSendOtpAsync(otpRequestModel);
+                    await _authenticationService.GenerateSendRegistrationOtpAsync(otpRequestModel);
 
                     await transaction.CommitAsync();
 

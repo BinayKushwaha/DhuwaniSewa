@@ -10,8 +10,9 @@ namespace DhuwaniSewa.Domain
     {
         Task<ResponseModel> Login(LoginViewModel request);
         Task<ResponseModel> GetRefreshedTokenAsync(RefreshTokenViewModel request);
-        Task<bool> GenerateAndSendOtpAsync(OtpViewModel reuest);
-        Task<bool> VerifyOtpAsync(OtpViewModel request);
+        Task<bool> GenerateSendRegistrationOtpAsync(OtpViewModel reuest);
         Task<bool> VerifyAccountAsync(OtpViewModel request);
+        Task<bool> GenerateSendPasswordResetOtpAsync(OtpViewModel request);
+        Task<bool> VerifyOtpResetPassword(PasswordResetViewModel request);
     }
 }

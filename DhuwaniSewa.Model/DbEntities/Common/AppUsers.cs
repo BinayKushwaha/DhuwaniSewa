@@ -23,6 +23,7 @@ namespace DhuwaniSewa.Model.DbEntities
         public bool IsServiceProvider { get; set; }
         public string Otp { get; set; }
         public DateTime OtpCreatedDate { get; set; }
+        public bool IsFreshOtp { get; set; }
 
         public virtual ApplicationUsers Users { get; set; }
         public virtual Customer Customer { get; set; }
