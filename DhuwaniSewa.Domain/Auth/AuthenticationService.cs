@@ -106,6 +106,7 @@ namespace DhuwaniSewa.Domain
                 if (aspUser == null && aspUser.AppUsers == null)
                     throw new CustomException($"User does not exit.");
 
+                request.EmalMobileNumber = aspUser.UserName;
                 success = await GenerateSendOtpAsync(aspUser, request);
                 return success;
             }
@@ -114,21 +115,24 @@ namespace DhuwaniSewa.Domain
                 throw;
             }
         }
-        public async Task<bool> GenerateSendPasswordResetOtpAsync(OtpViewModel request)
+        public async Task<string> GenerateSendPasswordResetOtpAsync(OtpViewModel request)
         {
             try
             {
                 bool success = false;
-                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName) && a.IsActive);
+                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a =>
+                (
+                a.UserName== request.EmalMobileNumber
+                || (a.EmailConfirmed && request.EmalMobileNumber.ToLower().Trim()==a.Email.ToLower().Trim())
+                || (a.PhoneNumberConfirmed && request.EmalMobileNumber.Trim()==a.PhoneNumber.Trim())
+                )
+                && a.IsActive);
                 if (aspUser == null && aspUser.AppUsers == null)
-                    throw new CustomException($"User does not exit.");
-                if (!aspUser.EmailConfirmed && !aspUser.PhoneNumberConfirmed)
-                    return success;
-                if (!request.EmalMobileNumber.Equals(aspUser.Email, StringComparison.OrdinalIgnoreCase) && !request.EmalMobileNumber.Equals(aspUser.PhoneNumber, StringComparison.OrdinalIgnoreCase))
-                    return success;
-
+                    throw new CustomException($"{request.EmalMobileNumber} has doesn`t any associated account.");
                 success = await GenerateSendOtpAsync(aspUser, request);
-                return success;
+
+                var userName = aspUser.UserName;
+                return userName;
             }
             catch (Exception ex)
             {
@@ -137,40 +141,35 @@ namespace DhuwaniSewa.Domain
         }
         private async Task<bool> GenerateSendOtpAsync(ApplicationUsers user, OtpViewModel request)
         {
-            using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+            try
             {
-                try
+                var otp = OtpGenerator();
+                user.AppUsers.Otp = otp;
+                user.AppUsers.OtpCreatedDate = DateTime.Now;
+                user.AppUsers.IsFreshOtp = true;
+                _userRepo.Update(user);
+                await _unitOfWork.CommitAsync();
+
+                if (CustomValidator.IsEmail(request.EmalMobileNumber.Trim()))
                 {
-                    var otp = OtpGenerator();
-                    user.AppUsers.Otp = otp;
-                    user.AppUsers.OtpCreatedDate = DateTime.Now;
-                    user.AppUsers.IsFreshOtp = true;
-                    _userRepo.Update(user);
-                    await _unitOfWork.CommitAsync();
-
-                    if (CustomValidator.IsEmail(request.EmalMobileNumber.Trim()))
-                    {
-                        var mailMesage = new MailViewModel();
-                        mailMesage.To.Add(request.UserName);
-                        mailMesage.Subject = request.MailSubject;
-                        mailMesage.Body = string.Format(request.MailBody, otp);
-                        await _mailService.SendMailAsync(mailMesage);
-                    }
-
-                    ///TODO: Implement mobile service for otp
-
-                    await transaction.CommitAsync();
-                    return true;
+                    var mailMesage = new MailViewModel();
+                    mailMesage.To.Add(request.EmalMobileNumber);
+                    mailMesage.Subject = request.MailSubject;
+                    mailMesage.Body = string.Format(request.MailBody, otp);
+                    await _mailService.SendMailAsync(mailMesage);
                 }
-                catch (Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
+
+                ///TODO: Implement mobile service for otp
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
-        public async Task<bool> VerifyAccountAsync(OtpViewModel request)
+        public async Task<bool> VerifyAccountAsync(VerifyOtpViewModel request)
         {
             using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
             {
@@ -219,12 +218,16 @@ namespace DhuwaniSewa.Domain
                         Otp = request.Otp
                     };
 
-                    var otpVerified = await VerifyOtpAsync(param);
+                    var otpVerifyModel = new VerifyOtpViewModel();
+                    otpVerifyModel.UserName = request.UserName;
+                    otpVerifyModel.Otp = request.Otp;
+
+                    var otpVerified = await VerifyOtpAsync(otpVerifyModel);
                     if (!otpVerified)
                         throw new CustomException("Your otp is expired. Please try another.");
 
                     var user = await _userManager.FindByNameAsync(request.UserName);
-                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user,request.Password);
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, request.Password);
                     var result = await _userManager.UpdateAsync(user);
                     if (!result.Succeeded)
                         throw new Exception("Failed to reset password.");
@@ -242,7 +245,7 @@ namespace DhuwaniSewa.Domain
         }
 
         #region Helper Methods
-        private async Task<bool> VerifyOtpAsync(OtpViewModel request)
+        private async Task<bool> VerifyOtpAsync(VerifyOtpViewModel request)
         {
             try
             {

@@ -91,15 +91,18 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         [HttpPost]
         [AllowAnonymous]
         [Route("registrationcreateotp")]
-        public async Task<IActionResult> CreateSendRegistrationOtpAsync(OtpViewModel request)
+        public async Task<IActionResult> CreateSendRegistrationOtpAsync(RegistrationCreateOtpViewModel request)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-                request.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
-                request.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
-                var result = await _authenticationService.GenerateSendRegistrationOtpAsync(request);
+
+                var param = new OtpViewModel();
+                param.UserName = request.UserName;
+                param.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
+                param.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
+                var result = await _authenticationService.GenerateSendRegistrationOtpAsync(param);
                 if (result)
                     return Ok(ResponseModel.Success("Otp is send to your username."));
                 else
@@ -118,7 +121,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         [HttpPost]
         [AllowAnonymous]
         [Route("verifyaccount")]
-        public async Task<IActionResult> VerifyAccountAsync(OtpViewModel request)
+        public async Task<IActionResult> VerifyAccountAsync(VerifyOtpViewModel request)
         {
             try
             {
@@ -143,19 +146,19 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
         [HttpPost]
         [AllowAnonymous]
         [Route("resetpasswordcreateotp")]
-        public async Task<IActionResult>CreateSendResetPasswordOtpAsync(OtpViewModel request)
+        public async Task<IActionResult>CreateSendResetPasswordOtpAsync(PasswordResetCreateOtpViewModel request)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid inputs.");
-                request.MailSubject = MessageTemplate.Password_Reset_OTP_Mail_Subject;
-                request.MailBody = MessageTemplate.Password_Reset_OTP_Mail_Body;
-                var result = await _authenticationService.GenerateSendPasswordResetOtpAsync(request);
-                if (result)
-                    return Ok(ResponseModel.Success("Otp is send to your username."));
-                else
-                    return Ok(ResponseModel.Info("Failed to create otp."));
+
+                var paramModel = new OtpViewModel();
+                paramModel.EmalMobileNumber = request.EmailMobileNumber;
+                paramModel.MailSubject = MessageTemplate.Password_Reset_OTP_Mail_Subject;
+                paramModel.MailBody = MessageTemplate.Password_Reset_OTP_Mail_Body;
+                var userName = await _authenticationService.GenerateSendPasswordResetOtpAsync(paramModel);
+                return Ok(ResponseModel.Success("Otp is send to your username.",userName));
             }
             catch (CustomException ex)
             {
