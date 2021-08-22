@@ -29,6 +29,8 @@ namespace DhuwaniSewa.Domain
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly IRepositoryService<ApplicationUsers, int> _userRepo;
         private readonly IMailService _mailService;
+        private readonly IUserService _userService;
+        private readonly IOtpService _otpService;
 
         public AuthenticationService(UserManager<ApplicationUsers> userManager,
             IOptions<JwtConfiguration> setting,
@@ -36,7 +38,9 @@ namespace DhuwaniSewa.Domain
             IUnitOfWork unitOfWork,
             TokenValidationParameters tokenValidationParameters,
             IRepositoryService<ApplicationUsers, int> userRepo,
-            IMailService mailService)
+            IMailService mailService,
+            IUserService userService,
+            IOtpService otpService)
         {
             this._userManager = userManager;
             this._jwtConfiguration = setting.Value;
@@ -45,6 +49,8 @@ namespace DhuwaniSewa.Domain
             this._tokenValidationParameters = tokenValidationParameters;
             this._userRepo = userRepo;
             this._mailService = mailService;
+            this._userService = userService;
+            this._otpService = otpService;
         }
         public async Task<ResponseModel> Login(LoginViewModel request)
         {
@@ -54,23 +60,31 @@ namespace DhuwaniSewa.Domain
                 if (user == null)
                     throw new CustomException("Invalid inputs.");
                 if (!await _userManager.CheckPasswordAsync(user, request.Password))
-                    throw new CustomException("Username and password are not correct.");
+                    throw new CustomException("Incorrect username or password.");
                 if (!user.EmailConfirmed && !user.PhoneNumberConfirmed)
                     throw new CustomException("Account not verified. Please verify.");
+
+                var userDetail =await _userService.GetAsync(user.Id);
 
                 AuthenticationResult result = await CreateJwtTokenAsync(user);
                 if (!result.Succeeded)
                     throw new Exception("Failed to create token");
-                var token = new RefreshTokenViewModel();
-                token.AccessToken = result.Token;
-                token.RefreshToken = result.RefreshToken;
-                return ResponseModel.Success("Logedin successfully.", token);
+
+                var responseModel = new LoginResponseModel();
+                responseModel.UserId = userDetail.UserId;
+                responseModel.AppUserId = userDetail.AppUserId;
+                responseModel.UserName = userDetail.UserName;
+                responseModel.FullName = userDetail.FullName;
+                responseModel.AccessToken = result.Token;
+                responseModel.RefreshToken = result.RefreshToken;
+                return ResponseModel.Success("Logedin successfully.", responseModel);
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
+
         public async Task<ResponseModel> GetRefreshedTokenAsync(RefreshTokenViewModel request)
         {
             try
@@ -97,78 +111,7 @@ namespace DhuwaniSewa.Domain
                 return ResponseModel.Error("Failed to refresh access token.");
             }
         }
-        public async Task<bool> GenerateSendRegistrationOtpAsync(OtpViewModel request)
-        {
-            try
-            {
-                bool success = false;
-                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => string.Equals(a.UserName, request.UserName) && a.IsActive);
-                if (aspUser == null && aspUser.AppUsers == null)
-                    throw new CustomException($"User does not exit.");
-
-                request.EmalMobileNumber = aspUser.UserName;
-                success = await GenerateSendOtpAsync(aspUser, request);
-                return success;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        public async Task<string> GenerateSendPasswordResetOtpAsync(OtpViewModel request)
-        {
-            try
-            {
-                bool success = false;
-                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a =>
-                (
-                a.UserName== request.EmalMobileNumber
-                || (a.EmailConfirmed && request.EmalMobileNumber.ToLower().Trim()==a.Email.ToLower().Trim())
-                || (a.PhoneNumberConfirmed && request.EmalMobileNumber.Trim()==a.PhoneNumber.Trim())
-                )
-                && a.IsActive);
-                if (aspUser == null && aspUser.AppUsers == null)
-                    throw new CustomException($"{request.EmalMobileNumber} has doesn`t any associated account.");
-                success = await GenerateSendOtpAsync(aspUser, request);
-
-                var userName = aspUser.UserName;
-                return userName;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        private async Task<bool> GenerateSendOtpAsync(ApplicationUsers user, OtpViewModel request)
-        {
-            try
-            {
-                var otp = OtpGenerator();
-                user.AppUsers.Otp = otp;
-                user.AppUsers.OtpCreatedDate = DateTime.Now;
-                user.AppUsers.IsFreshOtp = true;
-                _userRepo.Update(user);
-                await _unitOfWork.CommitAsync();
-
-                if (CustomValidator.IsEmail(request.EmalMobileNumber.Trim()))
-                {
-                    var mailMesage = new MailViewModel();
-                    mailMesage.To.Add(request.EmalMobileNumber);
-                    mailMesage.Subject = request.MailSubject;
-                    mailMesage.Body = string.Format(request.MailBody, otp);
-                    await _mailService.SendMailAsync(mailMesage);
-                }
-
-                ///TODO: Implement mobile service for otp
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+        
         public async Task<bool> VerifyAccountAsync(VerifyOtpViewModel request)
         {
             using (var transaction = await _unitOfWork.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
@@ -176,7 +119,7 @@ namespace DhuwaniSewa.Domain
                 try
                 {
                     bool verified = false;
-                    var otpVerified = await VerifyOtpAsync(request);
+                    var otpVerified = await _otpService.VerifyOtpAsync(request);
                     if (!otpVerified)
                         throw new CustomException("Your otp is expired. Please try another.");
                     var aspUser = await _userRepo.GetAync(a => a.UserName == request.UserName);
@@ -222,7 +165,7 @@ namespace DhuwaniSewa.Domain
                     otpVerifyModel.UserName = request.UserName;
                     otpVerifyModel.Otp = request.Otp;
 
-                    var otpVerified = await VerifyOtpAsync(otpVerifyModel);
+                    var otpVerified = await _otpService.VerifyOtpAsync(otpVerifyModel);
                     if (!otpVerified)
                         throw new CustomException("Your otp is expired. Please try another.");
 
@@ -245,41 +188,7 @@ namespace DhuwaniSewa.Domain
         }
 
         #region Helper Methods
-        private async Task<bool> VerifyOtpAsync(VerifyOtpViewModel request)
-        {
-            try
-            {
-                bool validOtp = false;
-                var aspUser = await _userRepo.GetQueryable().Include(a => a.AppUsers).FirstOrDefaultAsync(a => a.UserName == request.UserName);
-                if (aspUser == null && aspUser.AppUsers == null)
-                    throw new CustomException($"{request.UserName} does not exist.");
-                double timeElapsed = DateTime.Now.Subtract(aspUser.AppUsers.OtpCreatedDate).TotalMinutes;
-                if (string.Equals(aspUser.AppUsers.Otp, request.Otp) && timeElapsed < 10 && aspUser.AppUsers.IsFreshOtp)
-                {
-                    validOtp = true;
-                    aspUser.AppUsers.IsFreshOtp = false;
-                    _userRepo.Update(aspUser);
-                    await _unitOfWork.CommitAsync();
-                }
-                return validOtp;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        private string OtpGenerator()
-        {
-            StringBuilder otp = new StringBuilder();
-            string[] allowedChars = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
-            Random random = new Random();
-            for (int i = 0; i < 5; i++)
-            {
-                int number = random.Next(0, allowedChars.Length);
-                otp.Append(allowedChars[number]);
-            }
-            return otp.ToString();
-        }
+
         private async Task<AuthenticationResult> AddUpdateRefreshToken(RefreshToken refreshToken)
         {
             try

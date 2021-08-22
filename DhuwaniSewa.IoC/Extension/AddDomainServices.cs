@@ -15,6 +15,8 @@ namespace DhuwaniSewa.IoC
             services.AddTransient<IPersonDetailService, PersonDetailService>();
             services.AddTransient<IFiscalYearService, FiscalYearService>();
             services.AddTransient<ISerialNumberSevice, SerialNumberService>();
+            services.AddTransient<IOtpService, OtpService>();
+
         }
     }
 }

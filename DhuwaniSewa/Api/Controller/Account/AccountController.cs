@@ -20,11 +20,14 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
     {
         private readonly IUserService _userService;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IOtpService _otpService;
         public AccountController(IUserService userService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IOtpService otpService)
         {
             this._userService = userService;
             this._authenticationService = authenticationService;
+            this._otpService = otpService;
         }
 
         [HttpPost]
@@ -102,7 +105,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 param.UserName = request.UserName;
                 param.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
                 param.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
-                var result = await _authenticationService.GenerateSendRegistrationOtpAsync(param);
+                var result = await _otpService.GenerateSendRegistrationOtpAsync(param);
                 if (result)
                     return Ok(ResponseModel.Success("Otp is send to your username."));
                 else
@@ -157,7 +160,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Account
                 paramModel.EmalMobileNumber = request.EmailMobileNumber;
                 paramModel.MailSubject = MessageTemplate.Password_Reset_OTP_Mail_Subject;
                 paramModel.MailBody = MessageTemplate.Password_Reset_OTP_Mail_Body;
-                var userName = await _authenticationService.GenerateSendPasswordResetOtpAsync(paramModel);
+                var userName = await _otpService.GenerateSendPasswordResetOtpAsync(paramModel);
                 return Ok(ResponseModel.Success("Otp is send to your username.",userName));
             }
             catch (CustomException ex)

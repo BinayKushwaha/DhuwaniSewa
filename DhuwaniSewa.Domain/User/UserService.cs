@@ -6,6 +6,7 @@ using DhuwaniSewa.Model.ViewModel;
 using DhuwaniSewa.Utils;
 using DhuwaniSewa.Utils.CustomException;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,30 +15,36 @@ namespace DhuwaniSewa.Domain
 {
     public class UserService : IUserService
     {
-        private readonly IRepositoryService<AppUsers, int> _userRepository;
+        private readonly IRepositoryService<AppUsers, int> _appUserRepository;
         private readonly UserManager<ApplicationUsers> _userManager;
         private readonly IPersonDetailService _personDetailService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepositoryService<UserPersonDetail, int> _userPersonRepo;
         private readonly IServiceProviderService _serviceProviderService;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IRepositoryService<ApplicationUsers, int> _userRepo;
+        private readonly IOtpService _otpService;
+        private readonly IRepositoryService<PersonalDetail, int> _personDetailRepo;
 
-        public UserService(IRepositoryService<AppUsers, int> userRepository,
+        public UserService(IRepositoryService<AppUsers, int> appUserRepository,
             IUnitOfWork unitOfWork,
             UserManager<ApplicationUsers> userManager,
             IPersonDetailService personDetailService,
             IRepositoryService<UserPersonDetail, int> userPersonRepo,
             IServiceProviderService serviceProviderService,
-            IAuthenticationService authenticationService
+            IRepositoryService<ApplicationUsers, int> userRepo,
+            IOtpService otpService,
+            IRepositoryService<PersonalDetail, int> personDetailRepo
             )
         {
-            this._userRepository = userRepository;
+            this._appUserRepository = appUserRepository;
             this._unitOfWork = unitOfWork;
             this._userManager = userManager;
             this._personDetailService = personDetailService;
             this._userPersonRepo = userPersonRepo;
             this._serviceProviderService = serviceProviderService;
-            this._authenticationService = authenticationService;
+            this._userRepo = userRepo;
+            this._otpService = otpService;
+            this._personDetailRepo = personDetailRepo;
         }
         public async Task<RegistrationResponseModel> RegisterAsync(RegisterUserViewModel model)
         {
@@ -89,7 +96,7 @@ namespace DhuwaniSewa.Domain
 
                     }
 
-                    if (await _userRepository.GetAync(a => a.UserId == applicationUser.Id) != null)
+                    if (await _appUserRepository.GetAync(a => a.UserId == applicationUser.Id) != null)
                         throw new CustomException("User already exist.");
 
                     AppUsers appUsers = new AppUsers();
@@ -99,7 +106,7 @@ namespace DhuwaniSewa.Domain
                     appUsers.Active = true;
                     appUsers.UserId = applicationUser.Id;
 
-                    await _userRepository.AddAsync(appUsers);
+                    await _appUserRepository.AddAsync(appUsers);
                     await _unitOfWork.CommitAsync();
 
                     var personModel = new PersonDetailViewmodel();
@@ -135,7 +142,7 @@ namespace DhuwaniSewa.Domain
                     otpRequestModel.UserName = model.UserName;
                     otpRequestModel.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
                     otpRequestModel.MailBody =MessageTemplate.Registration_OTP_Mail_Body;
-                    await _authenticationService.GenerateSendRegistrationOtpAsync(otpRequestModel);
+                    await _otpService.GenerateSendRegistrationOtpAsync(otpRequestModel);
 
                     await transaction.CommitAsync();
 
@@ -161,6 +168,34 @@ namespace DhuwaniSewa.Domain
             await _userPersonRepo.AddAsync(userPerson);
             await _unitOfWork.CommitAsync();
             return request;
+        }
+
+        public async Task<UserViewModel> GetAsync(string userId)
+        {
+            try
+            {
+                var user = _userRepo.GetQueryable().Include(a => a.AppUsers).ThenInclude(a => a.PersonalDetail).FirstOrDefault(u => u.Id == userId && u.IsActive);
+                if (user == null)
+                    throw new ArgumentNullException("User not found.");
+
+                var userResultModel = new UserViewModel();
+                userResultModel.UserId = user.Id;
+                userResultModel.AppUserId = user.AppUsers.Id;
+                userResultModel.Active = user.IsActive;
+                userResultModel.IsServiceProvider = user.AppUsers.IsServiceProvider;
+                userResultModel.UserName = user.UserName;
+
+                int personId = user.AppUsers.PersonalDetail.FirstOrDefault().PersonId;
+                userResultModel.PersonId = personId;
+                var person =await _personDetailRepo.GetByIdAsync(personId);
+                
+                userResultModel.FullName = $"{person.FirstName} {person.LastName}";
+                return userResultModel;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
