@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {}
+    "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {}
   },
   "projects": {
-    "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {
+    "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+        "projectUniqueName": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
         "projectName": "DhuwaniSewa.Database",
-        "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
+        "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\obj\\",
+        "outputPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
-                "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
+              "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
+                "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj"
               }
             }
           }
@@ -88,14 +88,14 @@
         }
       }
     },
-    "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
+    "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
+        "projectUniqueName": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
         "projectName": "DhuwaniSewa.Model",
-        "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
+        "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\DhuwaniSewa.Model.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Model\\obj\\",
+        "outputPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

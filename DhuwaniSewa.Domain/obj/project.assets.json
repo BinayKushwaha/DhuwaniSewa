@@ -5916,11 +5916,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
+      "projectUniqueName": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
       "projectName": "DhuwaniSewa.Domain",
-      "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
+      "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Domain\\DhuwaniSewa.Domain.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Domain\\obj\\",
+      "outputPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5937,11 +5937,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {
-              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj"
+            "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj": {
+              "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Database\\DhuwaniSewa.Database.csproj"
             },
-            "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj": {
-              "projectPath": "D:\\Project\\Startup\\DhuwaniSewa\\Api\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj"
+            "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj": {
+              "projectPath": "D:\\Project\\Published\\Production\\DhuwaniSewa\\DhuwaniSewa.Utils\\DhuwaniSewa.Utils.csproj"
             }
           }
         }

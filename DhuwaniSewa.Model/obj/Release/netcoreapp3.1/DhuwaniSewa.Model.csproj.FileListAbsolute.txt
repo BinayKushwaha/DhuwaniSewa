@@ -6,3 +6,12 @@ D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\D
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
 D:\Project\Startup\DhuwaniSewa\Api\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.deps.json
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\bin\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.csproj.AssemblyReference.cache
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfoInputs.cache
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.AssemblyInfo.cs
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.csproj.CoreCompileInputs.cache
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.dll
+D:\Project\Published\Production\DhuwaniSewa\DhuwaniSewa.Model\obj\Release\netcoreapp3.1\DhuwaniSewa.Model.pdb
