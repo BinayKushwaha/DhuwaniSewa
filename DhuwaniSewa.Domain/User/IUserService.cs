@@ -11,5 +11,6 @@ namespace DhuwaniSewa.Domain
         Task<RegistrationResponseModel> RegisterAsync(RegisterUserViewModel model);
         Task<UserPersonViewModel> SaveUserPersonAsync(UserPersonViewModel request);
         Task<UserViewModel> GetAsync(string userId);
+        Task<UserProfileViewModel> GetProfileAsync(int userId);
     }
 }

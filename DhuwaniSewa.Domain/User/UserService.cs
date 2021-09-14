@@ -141,7 +141,7 @@ namespace DhuwaniSewa.Domain
                     var otpRequestModel = new OtpViewModel();
                     otpRequestModel.UserName = model.UserName;
                     otpRequestModel.MailSubject = MessageTemplate.Registration_OTP_Mail_Subject;
-                    otpRequestModel.MailBody =MessageTemplate.Registration_OTP_Mail_Body;
+                    otpRequestModel.MailBody = MessageTemplate.Registration_OTP_Mail_Body;
                     await _otpService.GenerateSendRegistrationOtpAsync(otpRequestModel);
 
                     await transaction.CommitAsync();
@@ -174,7 +174,7 @@ namespace DhuwaniSewa.Domain
         {
             try
             {
-                var user = _userRepo.GetQueryable().Include(a => a.AppUsers).ThenInclude(a => a.PersonalDetail).FirstOrDefault(u => u.Id == userId && u.IsActive);
+                var user =await _userRepo.GetQueryable().Include(a => a.AppUsers).ThenInclude(a => a.PersonalDetail).FirstOrDefaultAsync(u => u.Id == userId && u.IsActive);
                 if (user == null)
                     throw new ArgumentNullException("User not found.");
 
@@ -187,15 +187,47 @@ namespace DhuwaniSewa.Domain
 
                 int personId = user.AppUsers.PersonalDetail.FirstOrDefault().PersonId;
                 userResultModel.PersonId = personId;
-                var person =await _personDetailRepo.GetByIdAsync(personId);
-                
+                var person = await _personDetailRepo.GetByIdAsync(personId);
+
                 userResultModel.FullName = $"{person.FirstName} {person.LastName}";
                 return userResultModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
         }
+        public async Task<UserProfileViewModel> GetProfileAsync(int userId)
+        {
+            try
+            {
+                var userDetail = await _appUserRepository.GetQueryable().Include(a => a.PersonalDetail).FirstOrDefaultAsync(a => a.Id == userId);
+                if (userDetail == null)
+                    throw new ArgumentNullException("User not found.");
+                int personId = userDetail.PersonalDetail.FirstOrDefault().PersonId;
+                var personInfo = await _personDetailRepo.GetQueryable().Include(a => a.PersonalDetailContactDetails).ThenInclude(b => b.ContactDetail).
+                    FirstOrDefaultAsync(p => p.Id == personId);
+                if (personInfo == null)
+                    throw new ArgumentNullException("Person not found.");
+                var userProfileData = new UserProfileViewModel();
+                userProfileData.AppUserId = userDetail.Id;
+                userProfileData.FirstName = personInfo.FirstName;
+                userProfileData.LastName = personInfo.LastName;
+                var contactdetails = personInfo.PersonalDetailContactDetails.FirstOrDefault().ContactDetail;
+                userProfileData.Email = contactdetails.Email;
+                userProfileData.EmailConfirmed = contactdetails.EmailConfirmed;
+                userProfileData.MobileNumber = contactdetails.ContactNumber;
+                userProfileData.MobileNumberConfirmed = contactdetails.MobileNumberConfirmed;
+                var documentDetail = personInfo.PersonalDetailDocumentDetails?.FirstOrDefault(d => d.DocumentDetail.Type == nameof(DocumentType.Ctitzenship))?.DocumentDetail;
+                if(documentDetail!=null)
+                    userProfileData.CitizenshipNumber = documentDetail.RegistrationNumber;
+                return userProfileData;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }
