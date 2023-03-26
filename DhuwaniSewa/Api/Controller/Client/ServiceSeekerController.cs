@@ -10,6 +10,7 @@ namespace DhuwaniSewa.Web.Api.Controller.Client
     [ApiController]
     public class ServiceSeekerController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return null;
