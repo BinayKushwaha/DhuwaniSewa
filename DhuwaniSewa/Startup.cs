@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DhuwaniSewa.IoC;
 using DhuwaniSewa.IoC.Helper;
 using DhuwaniSewa.Model.DbEntities;
+using DhuwaniSewa.Model.ViewModel;
 
 namespace DhuwaniSewa
 {
@@ -27,7 +28,7 @@ namespace DhuwaniSewa
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddSwaggerGen();
             services.AddCustomServices(Configuration);
         }
 
@@ -37,24 +38,31 @@ namespace DhuwaniSewa
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;
+                });
             }
             app.UseCors();
             app.UseRouting();
 
             IdentityDataInitializer.SeedIdentity(userManager, roleManager);
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             //app.UseHttpsRedirection();
 
-            
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello! I am DhuwaniSewa. Published: V.1.3");
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello! I am DhuwaniSewa. Published: V.1.3");
+                //});
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "api/{controller}/{action}/{id?}");
